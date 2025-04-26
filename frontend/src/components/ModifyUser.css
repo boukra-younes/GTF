@@ -1,0 +1,91 @@
+.modify-user-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.modify-user-content {
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.modify-user-content h3 {
+  margin-bottom: 1rem;
+  text-align: center;
+  color: #333;
+}
+
+.modify-user-content form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.modify-user-content input {
+  padding: 0.7rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.modify-user-content .buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.modify-user-content button {
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.modify-user-content button[type="submit"] {
+  background-color: #4caf50;
+  color: white;
+}
+
+.modify-user-content button[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+.modify-user-content button[type="button"] {
+  background-color: #f44336;
+  color: white;
+}
+
+.modify-user-content button[type="button"]:hover {
+  background-color: #d32f2f;
+}
+
+.modify-user-content p {
+  color: #ff0000;
+  font-size: 0.9rem;
+  margin-top: -0.5rem;
+  text-align: center;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

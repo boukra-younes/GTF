@@ -1,0 +1,26 @@
+.admin-container {
+  margin: 0;
+  display: flex;
+  background-color: blue;
+  flex-direction: row;
+}
+.home-container {
+  background-color: royalblue;
+  width: 100%;
+}
+
+.user-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.user-table th,
+.user-table td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: left;
+}
+
+.user-table th {
+  background-color: #f5f5f5;
+}
