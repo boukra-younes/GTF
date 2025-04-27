@@ -16,6 +16,7 @@
 
 .user-table th,
 .user-table td {
+  background-color: red;
   border: 1px solid #ccc;
   padding: 10px;
   text-align: left;
