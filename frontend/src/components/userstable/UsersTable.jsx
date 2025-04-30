@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ModifyUser from "../ModifyUser";
+import "./UsersTable.css";
 
 function UsersTable() {
   const [selectedUser, setSelectedUser] = useState(null);
@@ -62,29 +63,31 @@ function UsersTable() {
     <>
       <table className="user-table">
         <thead>
-          <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Actions</th>
+          <tr className="table-header">
+            <th className="header-cell">Name</th>
+            <th className="header-cell">Email</th>
+            <th className="header-cell">Actions</th>
           </tr>
         </thead>
         <tbody>
           {users.length === 0 ? (
-            <tr>
-              <td colSpan="3">No users found</td>
+            <tr className="empty-row">
+              <td className="empty-message" colSpan="3">No users found</td>
             </tr>
           ) : (
             users.map((user, index) => (
-              <tr key={index}>
-                <td>{user.fname}</td>
-                <td>{user.email}</td>
-                <td>
+              <tr key={index} className="table-row">
+                <td className="table-cell">{user.fname}</td>
+                <td className="table-cell">{user.email}</td>
+                <td className="table-cell action-cell">
                   <button
+                    className="action-button modify-button"
                     onClick={() => setSelectedUser({ user, action: "edit" })}
                   >
                     Modify
                   </button>
                   <button
+                    className="action-button delete-button"
                     onClick={() => setSelectedUser({ user, action: "delete" })}
                   >
                     DELETE
@@ -102,6 +105,7 @@ function UsersTable() {
           user={selectedUser.user}
           onClose={() => setSelectedUser(null)}
           onUpdate={fetchUsers}
+          className="modify-user-modal"
         />
       )}
     </>

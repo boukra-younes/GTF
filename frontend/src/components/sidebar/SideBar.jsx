@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
   ChevronRight,
@@ -12,13 +12,29 @@ import {
   Bell,
   HelpCircle,
   LogOut,
+  Sun,
+  Moon,
 } from "lucide-react";
 import "./Sidebar.css";
 
 const SideBar = ({ user, initialExpanded = false, getaccess }) => {
   const [expanded, setExpanded] = useState(initialExpanded);
   const [activeItem, setActiveItem] = useState("viewers");
+  const [theme, setTheme] = useState("light");
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme") || "light";
+    setTheme(savedTheme);
+    document.documentElement.setAttribute("data-theme", savedTheme);
+  }, []);
+
+  const toggleTheme = () => {
+    const newTheme = theme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+    localStorage.setItem("theme", newTheme);
+    document.documentElement.setAttribute("data-theme", newTheme);
+  };
 
   const toggleSidebar = () => {
     setExpanded(!expanded);
@@ -27,6 +43,19 @@ const SideBar = ({ user, initialExpanded = false, getaccess }) => {
   const handleItemClick = (item) => {
     setActiveItem(item);
     navigate("/admin/" + item);
+  };
+
+  const handleLogout = async () => {
+    try {
+      await fetch("http://localhost/GTF/backend/logout.php", {
+        method: "GET",
+        credentials: "include",
+      });
+      // Redirect to login page after successful logout
+      navigate("/");
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
   };
 
   return (
@@ -119,20 +148,18 @@ const SideBar = ({ user, initialExpanded = false, getaccess }) => {
             <HelpCircle size={20} />
             {expanded && <span>Help</span>}
           </li>
+
+        <div className="divider settings-divider"></div>
+
+          <li onClick={toggleTheme}>
+            {theme === "light" ? <Moon size={20} /> : <Sun size={20} />}
+            {expanded && <span>Theme</span>}
+          </li>
         </ul>
       </div>
 
       <div className="sidebar-footer">
-        <li
-          className="logout-item"
-          onClick={async () => {
-            await fetch("http://localhost/GTF/backend/logout.php", {
-              method: "GET",
-              credentials: "include", // include session cookies
-            });
-            getaccess(location.pathname);
-          }}
-        >
+        <li className="logout-item" onClick={handleLogout}>
           <LogOut size={20} color="#f43f5e" />
           {expanded && <span className="logout-text">Log out</span>}
         </li>

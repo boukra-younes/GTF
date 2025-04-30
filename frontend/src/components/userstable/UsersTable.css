@@ -1,0 +1,275 @@
+.user-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: var(--bg-color);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px var(--shadow-color);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.table-header {
+  background-color: var(--neutral-light);
+  backdrop-filter: blur(10px);
+}
+
+.header-cell {
+  padding: 1.5rem;
+  text-align: left;
+  color: var(--text-color);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  border-bottom: 1px solid var(--border-color);
+  position: relative;
+}
+
+.header-cell:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 25%;
+  height: 50%;
+  width: 1px;
+  background-color: var(--border-color);
+}
+
+.table-row {
+  border-bottom: 1px solid var(--border-color);
+  transition: background-color 0.2s ease;
+}
+
+.table-cell {
+  padding: 1.5rem;
+  color: var(--text-color);
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.action-cell {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.action-button {
+  padding: 0.7rem 1.4rem;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: none;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+  overflow: hidden;
+}
+
+.action-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.action-button:hover::before {
+  transform: translateX(100%);
+}
+
+.modify-button {
+  background-color: var(--primary-color);
+  color: var(--bg-color);
+  box-shadow: 0 4px 12px rgba(52, 152, 219, 0.2);
+}
+
+.delete-button {
+  background-color: var(--secondary-color);
+  color: var(--bg-color);
+  box-shadow: 0 4px 12px rgba(231, 76, 60, 0.2);
+}
+
+.action-button:hover {
+  transform: translateY(-2px);
+}
+
+.modify-button:hover {
+  background-color: var(--primary-hover);
+  box-shadow: 0 6px 16px rgba(52, 152, 219, 0.3);
+}
+
+.delete-button:hover {
+  background-color: var(--secondary-hover);
+  box-shadow: 0 6px 16px rgba(231, 76, 60, 0.3);
+}
+
+.empty-row {
+  text-align: center;
+}
+
+.empty-message {
+  padding: 3rem;
+  color: var(--text-color);
+  font-size: 1.1rem;
+  opacity: 0.7;
+  font-weight: 500;
+}
+
+/* Dark theme specific styles */
+[data-theme="dark"] .user-table {
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .table-header {
+  background-color: var(--neutral-light);
+}
+
+[data-theme="dark"] .action-button:hover {
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* Modify User Modal Styles */
+.modify-user-content {
+  background-color: var(--bg-color);
+  border-radius: 20px;
+  padding: 2.5rem;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 8px 32px var(--shadow-color);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
+}
+
+.modify-user-content h2 {
+  color: var(--text-color);
+  margin-bottom: 2rem;
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  position: relative;
+  padding-bottom: 1rem;
+}
+
+.modify-user-content h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 50px;
+  height: 4px;
+  background-color: var(--primary-color);
+  border-radius: 2px;
+}
+
+.modify-user-content form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.modify-user-content input {
+  padding: 1rem 1.2rem;
+  border: 2px solid var(--border-color);
+  border-radius: 12px;
+  background-color: var(--input-bg);
+  color: var(--text-color);
+  font-size: 1rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-weight: 500;
+}
+
+.modify-user-content input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 4px rgba(52, 152, 219, 0.1);
+  transform: translateY(-1px);
+}
+
+.modify-user-content .button-group {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.modify-user-content button {
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: none;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+.modify-user-content button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.modify-user-content button:hover::before {
+  transform: translateX(100%);
+}
+
+.modify-user-content .submit-button {
+  background-color: var(--primary-color);
+  color: var(--bg-color);
+  box-shadow: 0 4px 12px rgba(52, 152, 219, 0.2);
+}
+
+.modify-user-content .cancel-button {
+  background-color: var(--secondary-color);
+  color: var(--bg-color);
+  box-shadow: 0 4px 12px rgba(231, 76, 60, 0.2);
+}
+
+.modify-user-content button:hover {
+  transform: translateY(-2px);
+}
+
+.modify-user-content .submit-button:hover {
+  background-color: var(--primary-hover);
+  box-shadow: 0 6px 16px rgba(52, 152, 219, 0.3);
+}
+
+.modify-user-content .cancel-button:hover {
+  background-color: var(--secondary-hover);
+  box-shadow: 0 6px 16px rgba(231, 76, 60, 0.3);
+}
+
+/* Dark theme specific styles for modal */
+[data-theme="dark"] .modify-user-content {
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="dark"] .modify-user-content input {
+  background-color: var(--input-bg);
+  border-color: var(--border-color);
+}
+
+[data-theme="dark"] .modify-user-content input:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 4px rgba(52, 152, 219, 0.2);
+}
+
+[data-theme="dark"] .modify-user-content button:hover {
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+} 

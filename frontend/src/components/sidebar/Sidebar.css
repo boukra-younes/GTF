@@ -3,8 +3,8 @@
   flex-direction: column;
   background-color: var(--bg-color);
   height: 100vh;
-  transition: width 0.5s ease;
-  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 2px 0 10px var(--shadow-color);
   overflow-y: auto;
   width: fit-content;
   box-sizing: border-box;
@@ -23,19 +23,19 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  /* adjusted to align logo with menu icons */
   padding: 20px 20px;
 }
 
 .collapsed .sidebar-header .logo {
-  /* center the logo when collapsed */
   margin: 0 auto;
+  transition: margin 0.3s ease;
 }
 
 .logo {
   display: flex;
   align-items: center;
   gap: 12px;
+  transition: all 0.3s ease;
 }
 
 .logo-icon {
@@ -49,12 +49,14 @@
   border-radius: 8px;
   font-weight: bold;
   font-size: 18px;
+  transition: all 0.3s ease;
 }
 
 .logo-text {
   font-weight: 600;
-  font-size: 18px;
-  color: #333;
+  font-size: 1.2rem;
+  color: var(--text-color);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .toggle-btn {
@@ -64,50 +66,58 @@
   background: transparent;
   border: none;
   cursor: pointer;
-  color: #64748b;
-  transition: transform 0.3s ease;
+  color: var(--text-color);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.expanded .toggle-btn {
-  transform: rotate(180deg);
-}
+
 
 .search-container {
   position: relative;
-  margin: 0 15px 15px;
+  margin: 1.2rem;
   box-sizing: border-box;
 }
 
 .search-container input {
   width: 100%;
-  padding: 10px 10px 10px 35px;
-  border: 1px solid #e2e8f0;
+  padding: 0.8rem 1rem 0.8rem 2.5rem;
+  border: 1px solid var(--border-color);
   border-radius: 8px;
-  font-size: 14px;
-  background-color: #f8fafc;
+  font-size: 0.9rem;
+  background-color: var(--input-bg);
+  color: var(--text-color);
   outline: none;
   box-sizing: border-box;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.search-container input:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.1);
 }
 
 .search-container svg {
   position: absolute;
-  left: 10px;
+  left: 0.8rem;
   top: 50%;
   transform: translateY(-50%);
-  color: #94a3b8;
+  color: var(--text-color);
+  transition: all 0.3s ease;
 }
 
 .search-icon-container {
   display: flex;
   justify-content: center;
   padding: 10px 0;
-  color: #64748b;
+  color: var(--text-color);
+  transition: all 0.3s ease;
 }
 
 .divider {
   height: 1px;
-  background-color: #e2e8f0;
+  background-color: var(--border-color);
   margin: 5px 0;
+  transition: all 0.3s ease;
 }
 
 .menu-container {
@@ -115,38 +125,43 @@
   display: flex;
   flex-direction: column;
   padding: 10px 0;
+  transition: padding 0.3s ease;
 }
 
 .menu-title {
   font-size: 12px;
   font-weight: 600;
-  color: #64748b;
+  color: var(--text-color);
   padding: 10px 20px;
   margin-top: 5px;
+  transition: all 0.3s ease;
 }
 
 .settings-title {
   margin-top: 15px;
+  transition: margin 0.3s ease;
 }
 
 .settings-divider {
   margin-bottom: 10px;
+  transition: margin 0.3s ease;
 }
 
 .menu-list {
   list-style: none;
   padding: 0;
   margin: 0;
+  transition: all 0.3s ease;
 }
 
 .menu-list li {
   display: flex;
   align-items: center;
-  padding: 12px 20px;
+  padding: 0.8rem 1.2rem;
   cursor: pointer;
   position: relative;
-  color: #64748b;
-  transition: background-color 0.2s ease;
+  color: var(--text-color);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .collapsed .menu-list li {
@@ -155,28 +170,30 @@
 }
 
 .menu-list li:hover {
-  background-color: #f1f5f9;
+  background-color: var(--neutral-light);
 }
 
 .menu-list li.active {
-  background-color: #e6f2ff;
-  color: #3b82f6;
+  background-color: var(--primary-color);
+  color: var(--bg-color);
 }
 
 .menu-list li span {
   margin-left: 12px;
   font-size: 14px;
+  transition: all 0.3s ease;
 }
 
 .menu-list li.has-submenu .menu-item {
   display: flex;
   align-items: center;
   width: 100%;
+  transition: width 0.3s ease;
 }
 
 .menu-list li.has-submenu .submenu-arrow {
   margin-left: auto;
-  transition: transform 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .menu-list li.has-submenu.open .submenu-arrow {
@@ -187,6 +204,7 @@
   padding-left: 25px;
   list-style: none;
   margin: 5px 0;
+  transition: all 0.3s ease;
 }
 
 .submenu li {
@@ -204,8 +222,8 @@
   position: absolute;
   top: 10px;
   right: 20px;
-  background-color: #ef4444;
-  color: white;
+  background-color: var(--secondary-color);
+  color: var(--bg-color);
   font-size: 10px;
   width: 18px;
   height: 18px;
@@ -213,6 +231,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: all 0.3s ease;
 }
 
 .collapsed .notification-badge {
@@ -221,26 +240,57 @@
 
 .sidebar-footer {
   margin-top: auto;
-  padding: 15px 0;
-  border-top: 1px solid #e2e8f0;
+  padding: 1rem;
+  border-top: 1px solid var(--border-color);
+  transition: all 0.3s ease;
 }
 
 .logout-item {
   display: flex;
   align-items: center;
-  padding: 12px 20px;
+  padding: 0.8rem 1.2rem;
   cursor: pointer;
-  color: #f43f5e;
+  color: var(--secondary-color);
+  transition: all 0.3s ease;
 }
 
-.collapsed .logout-item {
-  justify-content: center;
-  padding: 12px 0;
+.logout-item:hover {
+  background-color: var(--neutral-light);
 }
 
 .logout-text {
   margin-left: 12px;
   font-size: 14px;
-  color: #f43f5e;
+  color: var(--secondary-color);
   font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+/* Dark theme specific styles */
+[data-theme="dark"] .sidebar {
+  background-color: var(--bg-color);
+}
+
+[data-theme="dark"] .logo-icon {
+  background-color: var(--primary-color);
+  color: var(--bg-color);
+}
+
+[data-theme="dark"] .menu-list li:hover {
+  background-color: var(--neutral-light);
+}
+
+[data-theme="dark"] .menu-list li.active {
+  background-color: var(--primary-color);
+  color: var(--bg-color);
+}
+
+[data-theme="dark"] .notification-badge {
+  background-color: var(--secondary-color);
+  color: var(--bg-color);
+}
+
+[data-theme="dark"] .logout-item,
+[data-theme="dark"] .logout-text {
+  color: var(--secondary-color);
 }
