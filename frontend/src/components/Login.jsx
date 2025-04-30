@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { UserContext } from "../contexts/UserContext";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
@@ -8,8 +8,22 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
   const [isSuccess, setIsSuccess] = useState(null);
+  const [theme, setTheme] = useState("light");
   const { setUser } = useContext(UserContext);
-  const navigate = useNavigate(); // React Router hook
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme") || "light";
+    setTheme(savedTheme);
+    document.documentElement.setAttribute("data-theme", savedTheme);
+  }, []);
+
+  const toggleTheme = () => {
+    const newTheme = theme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+    localStorage.setItem("theme", newTheme);
+    document.documentElement.setAttribute("data-theme", newTheme);
+  };
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -23,6 +37,7 @@ const Login = () => {
         credentials: "include",
         body: JSON.stringify({ email, password }),
       });
+
 
       const result = await response.json();
       setMessage(result.message);
@@ -38,7 +53,6 @@ const Login = () => {
 
         setUser(userData);
         console.log(userData);
-        // Redirect based on role
         switch (result.role) {
           case "admin":
             navigate("/admin");
@@ -51,7 +65,6 @@ const Login = () => {
             break;
           default:
             navigate("/dashboard");
-
             break;
         }
       }
@@ -64,31 +77,37 @@ const Login = () => {
 
   return (
     <div className="login-container">
-      <h2>Login</h2>
+      <div className="login-image"></div>
+      <div className="login-form">
+        <button className="theme-toggle" onClick={toggleTheme}>
+          {theme === "light" ? "🌙" : "☀️"}
+        </button>
+        <h2>Login</h2>
 
-      {message && (
-        <div className={`custom-alert ${isSuccess ? "success" : "error"}`}>
-          {message}
-        </div>
-      )}
+        {message && (
+          <div className={`custom-alert ${isSuccess ? "success" : "error"}`}>
+            {message}
+          </div>
+        )}
 
-      <form onSubmit={handleLogin}>
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        <button type="submit">Login</button>
-      </form>
+        <form className="login-form-element" onSubmit={handleLogin}>
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+          <button className="login-button" type="submit">Login</button>
+        </form>
+      </div>
     </div>
   );
 };

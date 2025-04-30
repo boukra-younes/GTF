@@ -1,8 +1,44 @@
 /* Import Montserrat from Google Fonts */
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
 :root {
-  --primary-color: #ffffff;
-  --secondary-color: #64748b;
+  --primary-color: #3498db;
+  --primary-hover: #2980b9;
+  --text-color: #2c3e50;
+  --bg-color: #ffffff;
+  --input-bg: #f8f9fa;
+  --border-color: #e0e0e0;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --success-bg: #d4edda;
+  --success-text: #155724;
+  --error-bg: #f8d7da;
+  --error-text: #721c24;
+  --font-family: 'Poppins', sans-serif;
+  --secondary-color: #e74c3c;
+  --secondary-hover: #c0392b;
+  --accent-color: #2ecc71;
+  --accent-hover: #27ae60;
+  --neutral-light: #f5f6fa;
+  --neutral-dark: #2f3640;
+}
+
+[data-theme="dark"] {
+  --primary-color: #4a9eff;
+  --primary-hover: #3a8eef;
+  --text-color: #ecf0f1;
+  --bg-color: #1a1a1a;
+  --input-bg: #2d2d2d;
+  --border-color: #404040;
+  --shadow-color: rgba(0, 0, 0, 0.3);
+  --success-bg: #1e4620;
+  --success-text: #d4edda;
+  --error-bg: #4a1c1c;
+  --error-text: #f8d7da;
+  --secondary-color: #ff6b6b;
+  --secondary-hover: #ee5253;
+  --accent-color: #00b894;
+  --accent-hover: #00a885;
+  --neutral-light: #2d3436;
+  --neutral-dark: #dfe6e9;
 }
 /* Apply it globally */
 * {

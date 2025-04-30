@@ -20,6 +20,7 @@ SET time_zone = "+00:00";
 --
 -- Database: `gtf`
 --
+USE `gtf`;
 
 -- --------------------------------------------------------
 
@@ -28,11 +29,13 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `users` (
+  `id` int NOT NULL AUTO_INCREMENT,
   `fname` varchar(250) NOT NULL,
   `email` varchar(250) NOT NULL,
-  `password` varchar(250) NOT NULL,
-  `id` int(250) NOT NULL,
-  `role` enum('chef','admin','user') NOT NULL
+  `password` varchar(100) NOT NULL,
+  `role` enum('chef','admin','user') NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
