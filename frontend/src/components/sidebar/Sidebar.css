@@ -6,8 +6,11 @@
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 2px 0 10px var(--shadow-color);
   overflow-y: auto;
+  overflow-x: hidden;
   width: fit-content;
   box-sizing: border-box;
+  min-width: 100px;
+  max-width: 250px;
 }
 
 .sidebar.collapsed {
@@ -16,7 +19,7 @@
 }
 
 .sidebar.expanded {
-    width: 250px;
+  width: 250px;
 }
 
 .sidebar-header {
@@ -69,8 +72,6 @@
   color: var(--text-color);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
-
-
 
 .search-container {
   position: relative;
