@@ -34,6 +34,7 @@ CREATE TABLE `users` (
   `email` varchar(250) NOT NULL,
   `password` varchar(100) NOT NULL,
   `role` enum('chef','admin','user') NOT NULL,
+  `status` enum('pending','active') NOT NULL DEFAULT 'pending',
   PRIMARY KEY (`id`),
   UNIQUE (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

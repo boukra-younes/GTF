@@ -36,6 +36,12 @@ if ($result->num_rows === 0) {
     $user = $result->fetch_assoc();
 
     if (password_verify($password, $user['password'])) {
+        // Check if account is pending
+        if ($user['status'] === 'pending') {
+            echo json_encode(["success" => false, "message" => "Your account is pending admin approval. Please wait for approval before logging in."]);
+            exit();
+        }
+
         // ✅ Store user in session
         $_SESSION['user'] = [
             "id" => $user['id'],

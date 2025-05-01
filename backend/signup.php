@@ -46,15 +46,15 @@ if ($result->num_rows > 0) {
 }
 
 // Insert new user
-$stmt = $conn->prepare("INSERT INTO users (fname, email, password,role) VALUES (?, ?, ?,?)");
+$stmt = $conn->prepare("INSERT INTO users (fname, email, password, role, status) VALUES (?, ?, ?, ?, 'pending')");
 if (!$stmt) {
     http_response_code(500);
     echo json_encode(["error" => "Failed to prepare INSERT statement"]);
     exit();
 }
-$stmt->bind_param("ssss", $name, $email, $password,$role);
+$stmt->bind_param("ssss", $name, $email, $password, $role);
 if ($stmt->execute()) {
-    echo json_encode(["message" => "Signup successful"],);
+    echo json_encode(["message" => "Signup successful. Your account is pending admin approval."]);
 } else {
     http_response_code(500);
     echo json_encode(["error" => "Signup failed: " . $stmt->error]);

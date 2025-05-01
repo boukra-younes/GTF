@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./ModifyUser.css"; // Optional: style the popup
+import "./ModifyUser.css";
 
 const ModifyUser = ({ user, onClose, onUpdate, action }) => {
   const [fname, setFname] = useState(user.fname);
@@ -70,7 +70,7 @@ const ModifyUser = ({ user, onClose, onUpdate, action }) => {
       <div className="modify-user-content">
         <h3>Delete User</h3>
         {message && <p>{message}</p>}
-        <form onSubmit={handleDelete}>
+        <form onSubmit={handleDelete} action="delete">
           <div className="buttons">
             <button type="submit">Delete</button>
             <button type="button" onClick={onClose}>

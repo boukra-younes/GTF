@@ -5,7 +5,7 @@ header("Access-Control-Allow-Headers: Content-Type");
 header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
 header("Content-Type: application/json");
 // Connect to DB
-$conn = new mysqli("localhost", "root", "root", "gtf");
+$conn = new mysqli("localhost", "root", "", "gtf");
 
 // Handle DB connection error
 if ($conn->connect_error) {
