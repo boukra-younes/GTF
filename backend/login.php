@@ -1,18 +1,13 @@
 <?php
 session_start(); // ✅ Start session to store user info
 
-header("Access-Control-Allow-Origin: http://localhost:5173"); // Replace with frontend URL
-header("Access-Control-Allow-Credentials: true"); // ✅ Allow cookies/session
-header("Access-Control-Allow-Headers: Content-Type");
-header("Access-Control-Allow-Methods: POST, OPTIONS");
-header("Content-Type: application/json");
+include('config.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     http_response_code(200);
     exit(0);
 }
 
-include('config.php');
 
 $input = file_get_contents("php://input");
 $data = json_decode($input);

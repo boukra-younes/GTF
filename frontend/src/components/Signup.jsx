@@ -79,7 +79,7 @@ const Signup = () => {
           placeholder="Password"
           {...register("password")}
         />
-        
+
         {errors.password && (
           <span className="error-text">{errors.password.message}</span>
         )}

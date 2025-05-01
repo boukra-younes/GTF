@@ -1,0 +1,127 @@
+.notifications-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.notifications-container h2 {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.notifications-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.notification-item {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.notification-item.unread {
+  background-color: #f0f7ff;
+  border-left: 4px solid #007bff;
+}
+
+.notification-content {
+  flex: 1;
+}
+
+.notification-message {
+  margin: 0;
+  color: #333;
+  font-size: 16px;
+}
+
+.notification-time {
+  color: #666;
+  font-size: 14px;
+  margin-top: 5px;
+  display: block;
+}
+
+.notification-actions {
+  display: flex;
+  gap: 10px;
+  margin-left: 15px;
+}
+
+.mark-read-btn,
+.delete-btn {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+.mark-read-btn {
+  background-color: #007bff;
+  color: white;
+}
+
+.mark-read-btn:hover {
+  background-color: #0056b3;
+}
+
+.delete-btn {
+  background-color: #dc3545;
+  color: white;
+}
+
+.delete-btn:hover {
+  background-color: #c82333;
+}
+
+.no-notifications {
+  text-align: center;
+  color: #666;
+  padding: 20px;
+}
+
+.error {
+  color: #dc3545;
+  text-align: center;
+  padding: 20px;
+}
+
+/* Dark theme styles */
+[data-theme="dark"] .notifications-container {
+  background-color: #2c3e50;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .notifications-container h2 {
+  color: #ecf0f1;
+}
+
+[data-theme="dark"] .notification-item {
+  background-color: #34495e;
+  border-left-color: #2c3e50;
+}
+
+[data-theme="dark"] .notification-item.unread {
+  background-color: #1a5276;
+  border-left-color: #3498db;
+}
+
+[data-theme="dark"] .notification-message {
+  color: #ecf0f1;
+}
+
+[data-theme="dark"] .notification-time {
+  color: #bdc3c7;
+}
+
+[data-theme="dark"] .no-notifications {
+  background-color: #34495e;
+  color: #bdc3c7;
+}

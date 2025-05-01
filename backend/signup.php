@@ -8,11 +8,11 @@ header("Content-Type: application/json");
 
 // Handle preflight
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-   
     exit(0);
 }
 
-include ( 'config.php' );
+include('config.php');
+include('notifications/create_notification.php');
 
 // Get raw input
 $input = file_get_contents("php://input");
@@ -29,6 +29,7 @@ $name = $data->name;
 $email = $data->email;
 $password = password_hash($data->password, PASSWORD_DEFAULT);
 $role = $data->accountType;
+
 // Check if email already exists
 $stmt = $conn->prepare("SELECT * FROM users WHERE email = ?");
 if (!$stmt) {
@@ -53,7 +54,12 @@ if (!$stmt) {
     exit();
 }
 $stmt->bind_param("ssss", $name, $email, $password, $role);
+
 if ($stmt->execute()) {
+    // Create notification for all admins
+    $message = "New user registration: " . $name . " (" . $email . ")";
+    notifyAllAdmins($message);
+    
     echo json_encode(["message" => "Signup successful. Your account is pending admin approval."]);
 } else {
     http_response_code(500);

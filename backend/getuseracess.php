@@ -20,7 +20,7 @@ if (!$data || !isset($data['route'])) {
 
 $route = $data['route'];
 $allowedRoutes = [
-    'admin' => ['/admin','/admin/users', '/home', '/manage-users'],
+    'admin' => ['/admin','/admin/users', '/admin/notifications', '/home'],
     'client' => ['/client', '/client-dashboard'],
     'chef' => ['/doctor', '/appointments'],
 ];

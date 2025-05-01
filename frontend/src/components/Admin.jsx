@@ -47,7 +47,7 @@ const Admin = () => {
 
   return (
     <div className="admin-container">
-      <SideBar user={user} getaccess={getaccess} />
+      <SideBar user={user} />
       <div className="home-container">
         <Outlet />
       </div>

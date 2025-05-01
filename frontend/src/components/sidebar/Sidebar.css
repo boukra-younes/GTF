@@ -221,18 +221,20 @@
 
 .notification-badge {
   position: absolute;
-  top: 10px;
-  right: 20px;
-  background-color: var(--secondary-color);
-  color: var(--bg-color);
-  font-size: 10px;
-  width: 18px;
-  height: 18px;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #f43f5e;
+  color: white;
   border-radius: 50%;
+  min-width: 20px;
+  height: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s ease;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0 6px;
 }
 
 .collapsed .notification-badge {
@@ -287,8 +289,7 @@
 }
 
 [data-theme="dark"] .notification-badge {
-  background-color: var(--secondary-color);
-  color: var(--bg-color);
+  background-color: #ef4444;
 }
 
 [data-theme="dark"] .logout-item,

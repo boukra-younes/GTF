@@ -5,6 +5,7 @@ import Home from "./components/Home";
 import UsersTable from "./components/userstable/UsersTable";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Admin from "./components/Admin";
+import Notifications from "./components/Notifications";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/admin" element={<Admin />}>
           <Route path="users" element={<UsersTable />} />
+          <Route path="notifications" element={<Notifications />} />
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<Home />} />

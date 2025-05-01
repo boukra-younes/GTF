@@ -17,17 +17,38 @@ import {
 } from "lucide-react";
 import "./Sidebar.css";
 
-const SideBar = ({ user, initialExpanded = false, getaccess }) => {
+const SideBar = ({ user, initialExpanded = false }) => {
   const [expanded, setExpanded] = useState(initialExpanded);
   const [activeItem, setActiveItem] = useState("viewers");
   const [theme, setTheme] = useState("light");
+  const [notificationCount, setNotificationCount] = useState(0);
   const navigate = useNavigate();
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme") || "light";
     setTheme(savedTheme);
     document.documentElement.setAttribute("data-theme", savedTheme);
+    fetchNotificationCount();
   }, []);
+
+  const fetchNotificationCount = async () => {
+    try {
+      const response = await fetch(
+        "http://localhost/GTF/backend/notifications/get_notifications.php",
+        {
+          credentials: "include",
+        }
+      );
+
+      if (response.ok) {
+        const notifications = await response.json();
+        const unreadCount = notifications.filter((n) => !n.is_read).length;
+        setNotificationCount(unreadCount);
+      }
+    } catch (error) {
+      console.error("Failed to fetch notification count:", error);
+    }
+  };
 
   const toggleTheme = () => {
     const newTheme = theme === "light" ? "dark" : "light";
@@ -133,12 +154,14 @@ const SideBar = ({ user, initialExpanded = false, getaccess }) => {
           </li>
 
           <li
-            className={activeItem === "notification" ? "active" : ""}
-            onClick={() => handleItemClick("notification")}
+            className={activeItem === "notifications" ? "active" : ""}
+            onClick={() => handleItemClick("notifications")}
           >
             <Bell size={20} />
-            {expanded && <span>Notification</span>}
-            <span className="notification-badge">3</span>
+            {expanded && <span>Notifications</span>}
+            {notificationCount > 0 && (
+              <span className="notification-badge">{notificationCount}</span>
+            )}
           </li>
 
           <li
@@ -149,7 +172,7 @@ const SideBar = ({ user, initialExpanded = false, getaccess }) => {
             {expanded && <span>Help</span>}
           </li>
 
-        <div className="divider settings-divider"></div>
+          <div className="divider settings-divider"></div>
 
           <li onClick={toggleTheme}>
             {theme === "light" ? <Moon size={20} /> : <Sun size={20} />}
