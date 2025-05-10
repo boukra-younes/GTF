@@ -28,23 +28,23 @@ USE `gtf`;
 -- Table structure for table `users`
 --
 
-CREATE TABLE `users` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `fname` varchar(250) NOT NULL,
-  `email` varchar(250) NOT NULL,
-  `password` varchar(100) NOT NULL,
-  `role` enum('chef','admin','user') NOT NULL,
-  `status` enum('pending','active') NOT NULL DEFAULT 'pending',
-  PRIMARY KEY (`id`),
-  UNIQUE (`email`)
+CREATE TABLE IF NOT EXISTS users (
+  id INT NOT NULL AUTO_INCREMENT,
+  fname VARCHAR(250) NOT NULL,
+  email VARCHAR(250) NOT NULL,
+  password VARCHAR(100) NOT NULL,
+  role ENUM('chef','admin','user') NOT NULL,
+  status ENUM('pending','active') NOT NULL DEFAULT 'pending',
+  PRIMARY KEY (id),
+  UNIQUE KEY (email)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`fname`, `email`, `password`, `id`, `role`) VALUES
-('tima1', 'tima1@mail.com', '$2y$10$KIseiPQ9ZiTEaatBhPIS5.CHeoho5AgGryaZxxgCXiPp.oa4Jk.vq', 30, 'admin');
+INSERT INTO users (fname, email, password, role, status) VALUES
+('admin', 'admin@mail.com', '$2y$10$KIseiPQ9ZiTEaatBhPIS5.CHeoho5AgGryaZxxgCXiPp.oa4Jk.vq', 'admin', 'active');
 
 --
 -- Indexes for dumped tables
@@ -53,8 +53,8 @@ INSERT INTO `users` (`fname`, `email`, `password`, `id`, `role`) VALUES
 --
 -- Indexes for table `users`
 --
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
+ALTER TABLE users ADD PRIMARY KEY (id);
+ALTER TABLE users ADD UNIQUE (email);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -63,21 +63,34 @@ ALTER TABLE `users`
 --
 -- AUTO_INCREMENT for table `users`
 --
-ALTER TABLE `users`
-  MODIFY `id` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+ALTER TABLE users MODIFY id INT NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 
-CREATE TABLE `notifications` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `user_id` int NOT NULL,
-  `message` text NOT NULL,
-  `is_read` tinyint(1) NOT NULL DEFAULT '0',
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`),
-  CONSTRAINT `notifications_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
+CREATE TABLE IF NOT EXISTS notifications (
+  id INT NOT NULL AUTO_INCREMENT,
+  user_id INT NOT NULL,
+  message TEXT NOT NULL,
+  is_read TINYINT(1) NOT NULL DEFAULT 0,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  KEY user_id (user_id),
+  CONSTRAINT notifications_ibfk_1 FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Example notification (optional)
+-- INSERT INTO notifications (user_id, message) VALUES (1, 'Welcome to the system!');
+
+-- Indexes (redundant if already included above, but safe to repeat)
+ALTER TABLE notifications ADD PRIMARY KEY (id);
+ALTER TABLE notifications ADD KEY user_id (user_id);
+
+-- Foreign key constraint (redundant if already included above, but safe to repeat)
+ALTER TABLE notifications
+  ADD CONSTRAINT notifications_ibfk_1 FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE;
+
+-- Set auto-increment (optional, MySQL usually handles this)
+ALTER TABLE notifications MODIFY id INT NOT NULL AUTO_INCREMENT;

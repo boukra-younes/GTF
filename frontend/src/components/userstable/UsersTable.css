@@ -296,13 +296,13 @@
 }
 
 .status-badge.pending {
-  background-color: #fff3cd;
-  color: #856404;
+  background-color: var(--warning-bg);
+  color: var(--warning-text);
 }
 
 .status-badge.active {
-  background-color: #d4edda;
-  color: #155724;
+  background-color: var(--success-bg);
+  color: var(--success-text);
 }
 
 .approve-button {
@@ -325,4 +325,107 @@
 .deactivate-button:hover {
   background-color: #e0a800;
   box-shadow: 0 6px 16px rgba(255, 193, 7, 0.3);
+}
+
+/* Header section above the table */
+.user-table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--neutral-light);
+  border-radius: 16px 16px 0 0;
+  padding: 1.5rem 2rem 1rem 2rem;
+  box-shadow: 0 2px 8px var(--shadow-color);
+  margin-bottom: 0.5rem;
+}
+.user-table-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--text-color);
+  letter-spacing: 0.5px;
+}
+.user-table-meta {
+  display: flex;
+  gap: 2rem;
+  font-size: 1rem;
+  color: var(--text-color);
+  font-weight: 500;
+}
+
+/* Summary row at the bottom */
+.summary-row {
+  background: #f1f5f9;
+}
+.summary-cell {
+  padding: 1.2rem 2rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #2d3748;
+  border-top: 2px solid var(--border-color);
+  border-radius: 0 0 16px 16px;
+}
+
+.icon-action-button {
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 10px;
+  background: var(--neutral-light);
+  box-shadow: none;
+  cursor: pointer;
+  transition: box-shadow 0.2s, background 0.2s;
+  font-size: 1.3rem;
+  margin-right: 0.5rem;
+  padding: 0;
+}
+
+.modify-icon-button {
+  background: var(--neutral-light);
+  color: var(--primary-color);
+  transition: background 0.3s, color 0.3s, transform 0.3s;
+}
+.modify-icon-button:hover {
+  background: var(--primary-color);
+  color: var(--bg-color);
+  transform: scale(1.08) rotate(-8deg);
+}
+
+.delete-icon-button {
+  background: var(--error-bg);
+  color: var(--secondary-color);
+  transition: background 0.3s, color 0.3s, transform 0.3s;
+}
+.delete-icon-button:hover {
+  background: var(--secondary-color);
+  color: var(--bg-color);
+  transform: scale(1.08) rotate(8deg);
+}
+
+.approve-icon-button {
+  background: var(--success-bg);
+  color: var(--accent-color);
+  transition: background 0.3s, color 0.3s, transform 0.3s;
+}
+.approve-icon-button:hover {
+  background: var(--accent-color);
+  color: var(--bg-color);
+  transform: scale(1.08) rotate(-8deg);
+}
+
+.deactivate-icon-button {
+  background: var(--error-bg);
+  color: var(--secondary-color);
+  transition: background 0.3s, color 0.3s, transform 0.3s;
+}
+.deactivate-icon-button:hover {
+  background: var(--secondary-color);
+  color: var(--bg-color);
+  transform: scale(1.08) rotate(8deg);
+}
+
+.icon-action-button svg {
+  transition: color 0.3s, transform 0.3s;
 }

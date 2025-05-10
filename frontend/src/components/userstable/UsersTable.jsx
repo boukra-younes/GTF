@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ModifyUser from "../ModifyUser";
 import "./UsersTable.css";
+import { FiTrash2, FiEdit, FiCheck, FiX } from "react-icons/fi";
 
 function UsersTable() {
   const [selectedUser, setSelectedUser] = useState(null);
@@ -116,8 +117,22 @@ function UsersTable() {
     console.log(users);
   }, [users]);
 
+  // Calculate summary info
+  const totalUsers = users.length;
+  const activeUsers = users.filter(u => u.status === "active").length;
+  const pendingUsers = users.filter(u => u.status === "pending").length;
+
   return (
     <>
+      {/* Header Section */}
+      <div className="user-table-header">
+        <div className="user-table-title">Users Table</div>
+        <div className="user-table-meta">
+          <div><strong>Total Users:</strong> {totalUsers}</div>
+          <div><strong>Active:</strong> {activeUsers}</div>
+          <div><strong>Pending:</strong> {pendingUsers}</div>
+        </div>
+      </div>
       <table className="user-table">
         <thead>
           <tr className="table-header">
@@ -146,32 +161,36 @@ function UsersTable() {
                 </td>
                 <td className="table-cell action-cell">
                   <button
-                    className="action-button modify-button"
+                    className="icon-action-button modify-icon-button"
                     onClick={() => setSelectedUser({ user, action: "edit" })}
+                    title="Modify"
                   >
-                    Modify
+                    <FiEdit />
                   </button>
                   {user.status === "pending" && (
                     <button
-                      className="action-button approve-button"
+                      className="icon-action-button approve-icon-button"
                       onClick={() => handleApprove(user.id)}
+                      title="Approve"
                     >
-                      Approve
+                      <FiCheck />
                     </button>
                   )}
                   {user.status === "active" && (
                     <button
-                      className="action-button deactivate-button"
+                      className="icon-action-button deactivate-icon-button"
                       onClick={() => handleDeactivate(user.id)}
+                      title="Deactivate"
                     >
-                      Deactivate
+                      <FiX />
                     </button>
                   )}
                   <button
-                    className="action-button delete-button"
+                    className="icon-action-button delete-icon-button"
                     onClick={() => setSelectedUser({ user, action: "delete" })}
+                    title="Delete"
                   >
-                    DELETE
+                    <FiTrash2 />
                   </button>
                 </td>
               </tr>
@@ -179,7 +198,6 @@ function UsersTable() {
           )}
         </tbody>
       </table>
-
       {selectedUser && (
         <ModifyUser
           action={selectedUser.action}
