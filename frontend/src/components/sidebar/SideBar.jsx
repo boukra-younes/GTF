@@ -14,6 +14,7 @@ import {
   LogOut,
   Sun,
   Moon,
+  UserCheck,
 } from "lucide-react";
 import "./Sidebar.css";
 
@@ -91,18 +92,7 @@ const SideBar = ({ user, initialExpanded = false }) => {
         </button>
       </div>
 
-      {expanded && (
-        <div className="search-container">
-          <Search size={16} />
-          <input type="text" placeholder={user.fname} />
-        </div>
-      )}
-
-      {!expanded && (
-        <div className="search-icon-container">
-          <Search size={20} />
-        </div>
-      )}
+     
 
       <div className="divider"></div>
 
@@ -117,11 +107,11 @@ const SideBar = ({ user, initialExpanded = false }) => {
           </li>
 
           <li
-            className={activeItem === "Pending" ? "active" : ""}
-            onClick={() => handleItemClick("Pendingusers")}
+            className={activeItem === "pending" ? "active" : ""}
+            onClick={() => handleItemClick("pending")}
           >
-            <Calendar size={20} />
-            {expanded && <span>Schedule</span>}
+            <UserCheck size={20} />
+            {expanded && <span>Pending</span>}
           </li>
 
           <li
