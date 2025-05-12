@@ -117,8 +117,8 @@ const SideBar = ({ user, initialExpanded = false }) => {
           </li>
 
           <li
-            className={activeItem === "schedule" ? "active" : ""}
-            onClick={() => handleItemClick("schedule")}
+            className={activeItem === "Pending" ? "active" : ""}
+            onClick={() => handleItemClick("Pendingusers")}
           >
             <Calendar size={20} />
             {expanded && <span>Schedule</span>}
