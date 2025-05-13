@@ -13,6 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 
 include('config.php');
 include('notifications/create_notification.php');
+include('log_activity.php');
 
 // Get raw input
 $input = file_get_contents("php://input");
@@ -48,6 +49,7 @@ if ($result->num_rows > 0) {
 
 // Insert new user
 $stmt = $conn->prepare("INSERT INTO users (fname, email, password, role, status) VALUES (?, ?, ?, ?, 'pending')");
+
 if (!$stmt) {
     http_response_code(500);
     echo json_encode(["error" => "Failed to prepare INSERT statement"]);
@@ -56,6 +58,12 @@ if (!$stmt) {
 $stmt->bind_param("ssss", $name, $email, $password, $role);
 
 if ($stmt->execute()) {
+    // Get the new user's ID
+    $newUserId = $conn->insert_id;
+    
+    // Log the signup activity
+    logUserActivity($newUserId, 'signup', 'New user registration');
+    
     // Create notification for all admins
     $message = "New user registration: " . $name . " (" . $email . ")";
     notifyAllAdmins($message);

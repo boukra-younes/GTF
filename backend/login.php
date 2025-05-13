@@ -2,6 +2,7 @@
 session_start(); // ✅ Start session to store user info
 
 include('config.php');
+include('log_activity.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     http_response_code(200);
@@ -44,6 +45,9 @@ if ($result->num_rows === 0) {
             "fname" => $user['fname'],
             "role" => $user['role']
         ];
+        
+        // Log the login activity
+        logUserActivity($user['id'], 'login', 'User logged in');
 
         echo json_encode([
             "success" => true,

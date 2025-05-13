@@ -123,10 +123,16 @@ const SideBar = ({ user, initialExpanded = false }) => {
           </li>
         </ul>
 
-        {expanded && <div className="menu-title settings-title">SETTINGS</div>}
-        <div className="divider settings-divider"></div>
+        
 
         <ul className="menu-list">
+        <li
+            className={activeItem === "activity" ? "active" : ""}
+            onClick={() => handleItemClick("activity")}
+          >
+            <MessageSquare size={20} />
+            {expanded && <span>Message</span>}
+          </li>
           <li
             className={activeItem === "settings" ? "active" : ""}
             onClick={() => handleItemClick("settings")}
@@ -135,13 +141,7 @@ const SideBar = ({ user, initialExpanded = false }) => {
             {expanded && <span>Settings</span>}
           </li>
 
-          <li
-            className={activeItem === "message" ? "active" : ""}
-            onClick={() => handleItemClick("message")}
-          >
-            <MessageSquare size={20} />
-            {expanded && <span>Message</span>}
-          </li>
+         
 
           <li
             className={activeItem === "notifications" ? "active" : ""}

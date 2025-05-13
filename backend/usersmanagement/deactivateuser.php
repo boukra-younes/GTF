@@ -1,9 +1,8 @@
 <?php
 session_start();
 
-
-
 include('../config.php');
+include('../log_activity.php');
 
 $input = json_decode(file_get_contents("php://input"), true);
 
@@ -22,10 +21,13 @@ $stmt = $conn->prepare("UPDATE users SET status = 'pending' WHERE id = ?");
 $stmt->bind_param("i", $id);
 
 if ($stmt->execute()) {
+    // Log the deactivation activity
+    logUserActivity($_SESSION['user']['id'], 'deactivate_user', 'Admin deactivated user ID: ' . $id);
+    
     echo json_encode(["success" => true, "message" => "User deactivated successfully"]);
 } else {
     echo json_encode(["success" => false, "message" => "Failed to deactivate user"]);
 }
 
 $conn->close();
-?> 
+?>

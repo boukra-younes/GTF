@@ -1,8 +1,8 @@
 <?php
 session_start();
 
-
 include('../config.php');
+include('../log_activity.php');
 
 $input = json_decode(file_get_contents("php://input"), true);
 
@@ -23,6 +23,9 @@ $stmt = $conn->prepare("UPDATE users SET fname = ?, email = ? WHERE id = ?");
 $stmt->bind_param("ssi", $fname, $email, $id);
 
 if ($stmt->execute()) {
+    // Log the user modification activity
+    logUserActivity($_SESSION['user']['id'], 'modify_user', 'Admin modified user ID: ' . $id . ', Name: ' . $fname . ', Email: ' . $email);
+    
     echo json_encode(["success" => true, "message" => "User updated successfully"]);
 } else {
     echo json_encode(["success" => false, "message" => "Update failed"]);

@@ -9,6 +9,7 @@ import Notifications from "./components/Notifications";
 import PendingUsers from "./components/userstable/Pending";
 import UserSettings from "./components/UserSettings";
 import Dashboard from "./components/Dashboard";
+import ActivityLog from "./components/ActivityLog";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="notifications" element={<Notifications />} />
           <Route path="settings" element={<UserSettings />} />
           <Route path="dashboard" element={<Dashboard />} />
+          <Route path="activity" element={<ActivityLog />} />
            
         </Route>
         <Route path="/login" element={<Login />} />
