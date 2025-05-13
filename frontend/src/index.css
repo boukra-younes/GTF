@@ -30,8 +30,8 @@
 
 /* Color variables for dark mode */
 [data-theme="dark"] {
-  --primary-color: #27ae60;
-  --primary-hover: #219150;
+  --primary-color: #2ecc71;
+  --primary-hover: #27ae60;
   --primary-bg: #22313f;
   --secondary-color: #ff6b6b;
   --secondary-hover: #ee5253;
