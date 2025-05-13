@@ -24,6 +24,7 @@ function PendingUsers() {
         }
       );
       const data = await response.json();
+      console.log(data)
       setUsers(Array.isArray(data) ? data.filter(u => u.status === "pending") : []);
     } catch (err) {
       setError("Failed to fetch users");
@@ -34,7 +35,9 @@ function PendingUsers() {
 
   useEffect(() => {
     fetchUsers();
-    const intervalId = setInterval(fetchUsers, 3000);
+    const intervalId = setInterval(() => {
+      fetchUsers(); // Fetch every 3 seconds
+    }, 3000);
     return () => clearInterval(intervalId);
   }, []);
 

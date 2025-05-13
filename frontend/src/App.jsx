@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Admin from "./components/Admin";
 import Notifications from "./components/Notifications";
 import PendingUsers from "./components/userstable/Pending";
+import UserSettings from "./components/UserSettings";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="users" element={<UsersTable />} />
           <Route path="pending" element={<PendingUsers />} />
           <Route path="notifications" element={<Notifications />} />
+          <Route path="settings" element={<UserSettings />} />
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<Home />} />

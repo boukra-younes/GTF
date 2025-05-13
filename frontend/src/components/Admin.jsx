@@ -44,7 +44,7 @@ const Admin = () => {
   useEffect(() => {
     console.log(location.pathname);
     getaccess(location.pathname);
-    
+      
   }, [location.pathname]); // Add location.pathname as a dependency
 
   return (
