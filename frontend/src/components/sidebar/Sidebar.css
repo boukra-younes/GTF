@@ -11,6 +11,8 @@
   box-sizing: border-box;
   min-width: 100px;
   max-width: 250px;
+  will-change: width;
+  contain: layout style;
 }
 
 .sidebar.collapsed {
@@ -295,4 +297,45 @@
 [data-theme="dark"] .logout-item,
 [data-theme="dark"] .logout-text {
   color: var(--secondary-color);
+}
+
+/* Reduce animations on mobile */
+@media (max-width: 768px) {
+  .sidebar,
+  .logo,
+  .menu-list li,
+  .search-container input,
+  .divider,
+  .menu-container,
+  .menu-title,
+  .settings-title,
+  .settings-divider,
+  .menu-list {
+    transition: all 0.2s ease;
+  }
+  
+  .sidebar.collapsed {
+    width: 70px;
+  }
+  
+  .logo-icon {
+    width: 32px;
+    height: 32px;
+    font-size: 16px;
+  }
+}
+
+/* Improve touch targets for mobile */
+@media (max-width: 480px) {
+  .menu-list li {
+    padding: 1rem 1.2rem;
+  }
+  
+  .logout-item {
+    padding: 1rem 1.2rem;
+  }
+  
+  .toggle-btn {
+    padding: 10px;
+  }
 }

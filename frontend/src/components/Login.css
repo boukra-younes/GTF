@@ -75,12 +75,52 @@ body{
   letter-spacing: 0.5px;
 }
 
+/* Accessibility improvements */
 .login-form-element input:focus {
-  outline: none;
+  outline: 2px solid var(--primary-color);
   border-color: var(--primary-color);
   background-color: var(--bg-color);
   box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
   transform: translateY(-2px);
+}
+
+.login-button:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (forced-colors: active) {
+  .login-button {
+    border: 2px solid ButtonText;
+  }
+  
+  .login-form-element input {
+    border: 2px solid ButtonText;
+  }
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .login-button,
+  .login-form-element input,
+  .custom-alert,
+  .theme-toggle {
+    transition: none;
+  }
+  
+  .theme-toggle:hover {
+    transform: none;
+  }
+  
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
 }
 
 .login-button {

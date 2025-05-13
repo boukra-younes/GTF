@@ -429,3 +429,75 @@
 .icon-action-button svg {
   transition: color 0.3s, transform 0.3s;
 }
+
+/* Table responsiveness improvements */
+@media (max-width: 992px) {
+  .user-table {
+    display: block;
+    overflow-x: auto;
+  }
+  
+  .user-table-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  
+  .user-table-meta {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .table-cell {
+    padding: 1rem;
+  }
+  
+  .header-cell {
+    padding: 1rem;
+  }
+  
+  .action-cell {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .action-button {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+/* Accessibility improvements */
+.action-button:focus,
+.icon-action-button:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+/* Loading state */
+.table-loading {
+  text-align: center;
+  padding: 2rem;
+  color: var(--text-color);
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.loading-spinner {
+  display: inline-block;
+  width: 2rem;
+  height: 2rem;
+  border: 3px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  border-top-color: var(--primary-color);
+  animation: spin 1s ease-in-out infinite;
+  margin-right: 0.5rem;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

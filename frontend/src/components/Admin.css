@@ -14,10 +14,11 @@
   padding: 2rem;
   box-shadow: inset 0 0 10px var(--shadow-color);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  overflow-y: scroll;
+  overflow-y: auto;   
+  max-height: 100vh;
 }
 
-.user-table {
+.user-table { 
   width: 100%;
   border-collapse: collapse;
   background: var(--bg-color);
@@ -44,7 +45,6 @@
   letter-spacing: 0.5px;
 }
 
-
 .user-table td {
   color: var(--text-color);
 }
@@ -61,4 +61,71 @@
 [data-theme="dark"] .user-table th {
   background-color: var(--neutral-light);
   color: var(--text-color);
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .admin-container {
+    flex-direction: column;
+  }
+  
+  .home-container {
+    padding: 1rem;
+    overflow-y: auto;
+  }
+  
+  .user-table th,
+  .user-table td {
+    padding: 0.8rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .user-table th,
+  .user-table td {
+    padding: 0.6rem;
+    font-size: 0.8rem;
+  }
+  
+  .user-table th {
+    font-size: 0.75rem;
+  }
+  
+  /* Improve table responsiveness on small screens */
+  .user-table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}
+
+/* Accessibility improvements */
+.user-table th,
+.user-table td {
+  font-size: 0.9rem;
+}
+
+/* Focus styles for keyboard navigation */
+.user-table a:focus,
+.user-table button:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+/* Print styles */
+@media print {
+  .admin-container {
+    height: auto;
+    overflow: visible;
+  }
+  
+  .home-container {
+    box-shadow: none;
+    overflow: visible;
+  }
+  
+  .user-table {
+    box-shadow: none;
+  }
 }
