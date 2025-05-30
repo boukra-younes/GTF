@@ -222,35 +222,11 @@ const UserSettings = () => {
                 >
                   <option value="en">English</option>
                   <option value="fr">French</option>
-                  <option value="es">Spanish</option>
+                
                 </select>
               </div>
               
-              <div className="form-group">
-                <label>Notifications</label>
-                <div className="checkbox-group">
-                  <div className="checkbox-item">
-                    <input
-                      type="checkbox"
-                      id="emailNotifications"
-                      name="emailNotifications"
-                    />
-                    <label htmlFor="emailNotifications">
-                      Email Notifications
-                    </label>
-                  </div>
-                  <div className="checkbox-item">
-                    <input
-                      type="checkbox"
-                      id="smsNotifications"
-                      name="smsNotifications"
-                    />
-                    <label htmlFor="smsNotifications">
-                      SMS Notifications
-                    </label>
-                  </div>
-                </div>
-              </div>
+           
               
               <button type="submit" className="btn btn-primary">Save System Settings</button>
             </form>

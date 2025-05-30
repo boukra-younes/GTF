@@ -1,15 +1,16 @@
 import { useState } from "react";
-import Signup from "./components/Signup";
-import Login from "./components/Login";
+import Signup from "./pages/auth/Signup";
+import Login from "./pages/auth/Login";
 import Home from "./components/Home";
-import UsersTable from "./components/userstable/UsersTable";
+import UsersTable from "./components/admin/userstable/UsersTable";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Admin from "./components/Admin";
+import Admin from "./pages/admin/Admin";
 import Notifications from "./components/Notifications";
-import PendingUsers from "./components/userstable/Pending";
+import PendingUsers from "./components/admin/userstable/Pending";
 import UserSettings from "./components/UserSettings";
-import Dashboard from "./components/Dashboard";
-import ActivityLog from "./components/ActivityLog";
+import Dashboard from "./components/admin/Dashboard";
+import ActivityLog from "./components/admin/ActivityLog";
+import TravailForm from "./components/travail/TravailForm";
 
 function App() {
   return (
@@ -24,6 +25,10 @@ function App() {
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="activity" element={<ActivityLog />} />
            
+        </Route>
+        <Route path="/responsable" element={<Admin />}>
+          <Route path="add" element={<TravailForm />} />
+       
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<Home />} />

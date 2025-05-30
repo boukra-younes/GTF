@@ -98,14 +98,7 @@ const Dashboard = () => {
         </div>
       </div>
       
-      <div className="quick-actions">
-        <h3>Quick Actions</h3>
-        <div className="action-buttons">
-          <button className="action-button">View Reports</button>
-          <button className="action-button">Manage Users</button>
-          <button className="action-button">System Settings</button>
-        </div>
-      </div>
+   
     </div>
   );
 };
