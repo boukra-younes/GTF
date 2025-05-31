@@ -1,6 +1,22 @@
 /* Import Montserrat from Google Fonts */
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+::-webkit-scrollbar {
+  width: 6px;
+}
 
+::-webkit-scrollbar-track {
+  background: var(--bg-color);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-hover);
+}
 /* Color variables for light mode */
 :root {
   --primary-color: #27ae60;

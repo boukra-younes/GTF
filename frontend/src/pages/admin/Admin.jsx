@@ -3,7 +3,7 @@ import { Routes, Route, Outlet } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import "./Admin.css";
-import SideBar from "../../components/sidebar/SideBar";
+import SideBar from "../../components/admin/sidebar/SideBar";
 import { UserContext } from "../../contexts/UserContext";
 
 const Admin = () => {

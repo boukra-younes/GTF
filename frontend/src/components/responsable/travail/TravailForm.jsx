@@ -2,18 +2,18 @@ import React, { useState, useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { UserContext } from "../../contexts/UserContext";
+import { UserContext } from "../../../contexts/UserContext";
 import "./TravailForm.css";
 
 // Define Zod schema for validation
 const schema = z.object({
-  titre: z.string().min(3, "Title must be at least 3 characters"),
+  title: z.string().min(3, "Title must be at least 3 characters"),
   description: z.string().optional(),
   location: z.string().optional(),
-  date_debut: z.string().refine(val => !isNaN(Date.parse(val)), {
+  start_date: z.string().refine(val => !isNaN(Date.parse(val)), {
     message: "Please enter a valid start date",
   }),
-  date_fin: z.string().refine(val => !val || !isNaN(Date.parse(val)), {
+  end_date: z.string().refine(val => !val || !isNaN(Date.parse(val)), {
     message: "Please enter a valid end date",
   }).optional(),
   responsable_id: z.string().min(1, "Please select a responsible person"),
@@ -65,9 +65,10 @@ const TravailForm = ({ onSuccess }) => {
   }, []);
 
   const handleTravailSubmit = async (data) => {
+    console.log(data)
     try {
       // This would connect to your backend endpoint
-      const response = await fetch("http://localhost/GTF/backend/travail/create_travail.php", {
+      const response = await fetch("http://localhost/GTF/backend/travail.php", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -75,10 +76,11 @@ const TravailForm = ({ onSuccess }) => {
         credentials: "include",
         body: JSON.stringify(data),
       });
-
-      const result = await response.json();
       
+      const result = await response.json();
+      console.log(result)
       if (result.success) {
+        
         setIsSuccess(true);
         setMessage(result.message || "Work task created successfully");
         reset();
@@ -108,15 +110,15 @@ const TravailForm = ({ onSuccess }) => {
 
       <form onSubmit={handleSubmit(handleTravailSubmit)}>
         <div className="form-group">
-          <label htmlFor="titre">Title</label>
+          <label htmlFor="title">Title</label>
           <input 
             type="text" 
-            id="titre" 
-            className={`form-control ${errors.titre ? "is-invalid" : ""}`}
-            {...register("titre")} 
+            id="title" 
+            className={`form-control ${errors.title ? "is-invalid" : ""}`}
+            {...register("title")} 
           />
-          {errors.titre && (
-            <span className="error-text">{errors.titre.message}</span>
+          {errors.title && (
+            <span className="error-text">{errors.title.message}</span>
           )}
         </div>
 
@@ -142,28 +144,28 @@ const TravailForm = ({ onSuccess }) => {
 
         <div className="form-row">
           <div className="form-group">
-            <label htmlFor="date_debut">Start Date</label>
+            <label htmlFor="start_date">Start Date</label>
             <input 
               type="date" 
-              id="date_debut" 
-              className={`form-control ${errors.date_debut ? "is-invalid" : ""}`}
-              {...register("date_debut")} 
+              id="start_date" 
+              className={`form-control ${errors.start_date ? "is-invalid" : ""}`}
+              {...register("start_date")} 
             />
-            {errors.date_debut && (
-              <span className="error-text">{errors.date_debut.message}</span>
+            {errors.start_date && (
+              <span className="error-text">{errors.start_date.message}</span>
             )}
           </div>
 
           <div className="form-group">
-            <label htmlFor="date_fin">End Date</label>
+            <label htmlFor="end_date">End Date</label>
             <input 
               type="date" 
-              id="date_fin" 
-              className={`form-control ${errors.date_fin ? "is-invalid" : ""}`}
-              {...register("date_fin")} 
+              id="end_date" 
+              className={`form-control ${errors.end_date ? "is-invalid" : ""}`}
+              {...register("end_date")} 
             />
-            {errors.date_fin && (
-              <span className="error-text">{errors.date_fin.message}</span>
+            {errors.end_date && (
+              <span className="error-text">{errors.end_date.message}</span>
             )}
           </div>
         </div>

@@ -56,7 +56,6 @@ function Home() {
       <section className="hero-section">
         <div className="hero-content">
           <h1>Join us in the GTF system</h1>
-          <p>We are an organization that educates people about the platform of ecology and nature</p>
         </div>
       </section>
 
@@ -69,18 +68,18 @@ function Home() {
 
       <section className="stats-section">
         <div className="stat-card">
-          <h3>+685 trees planted</h3>
-          <p>More than 685 trees were planted last year with the help of our activists</p>
+          <h3>Project management made easy</h3>
+          <p>More than just a tool its boost work efficiency</p>
         </div>
         <div className="stat-card">
-          <h3>6 educational programs</h3>
-          <p>We launched and successfully completed 6 educational programs for young people</p>
+          <h3>All the work in one place</h3>
+          <p>helping orginize the projects</p>
         </div>
       </section>
 
       <section className="mission-section">
-        <h2>We strive to protect nature for future generations.</h2>
-      </section>
+        <h2>Smarter forestry greener future</h2>
+      </section>  
 
       <footer className="home-footer">
         <div className="footer-content">
