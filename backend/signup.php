@@ -60,7 +60,18 @@ $stmt->bind_param("ssss", $name, $email, $password, $role);
 if ($stmt->execute()) {
     // Get the new user's ID
     $newUserId = $conn->insert_id;
-    
+      if($role == 'agent'){
+        $stmt = $conn->prepare("INSERT INTO agents (agent_id , status) VALUES (?,  'free')");
+        
+        if (!$stmt) {
+            http_response_code(500);
+            echo json_encode(["error" => "Failed to prepare INSERT statement"]);
+            exit();
+        }
+        $stmt->bind_param("i", $newUserId );
+        $stmt->execute();
+      }
+         
     // Log the signup activity
     logUserActivity($newUserId, 'signup', 'New user registration');
     

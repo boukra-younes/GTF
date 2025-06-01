@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import "./ProjectsResponsable.css";
 import { FiEdit, FiUserPlus, FiTrash2 } from "react-icons/fi";
+import AffectAgent from "./AffectAgent";
 
 const ProjectsResponsable = () => {
   const [travails, setTravails] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [showAffectModal, setShowAffectModal] = useState(false);
+  const [selectedTravailId, setSelectedTravailId] = useState(null);
 
   const fetchTravails = async () => {
     setLoading(true);
@@ -39,8 +42,12 @@ const ProjectsResponsable = () => {
   };
 
   const handleAffect = (id) => {
-    // TODO: Implement affect logic/modal
-    alert(`Affect agent to travail ${id}`);
+    setSelectedTravailId(id);
+    setShowAffectModal(true);
+  };
+
+  const handleAffectSuccess = () => {
+    fetchTravails(); // Refresh the table
   };
 
   const handleDelete = async (id) => {
@@ -48,7 +55,7 @@ const ProjectsResponsable = () => {
       const response = await fetch(
         "http://localhost/GTF/backend/deletetravail.php",
         {
-          method: "POST", // Changed from GET to POST for proper data submission
+          method: "POST",
           credentials: "include",
           headers: {
             "Content-Type": "application/json",
@@ -123,7 +130,13 @@ const ProjectsResponsable = () => {
                   <td className="projects-table-cell">
                     <span className={`status-badge ${travail.status}`}>{travail.status}</span>
                   </td>
-                  <td className="projects-table-cell">{travail.agents_affectes_id ? travail.agents_affectes_id : <span style={{color: '#aaa'}}>Aucun</span>}</td>
+                  <td className="projects-table-cell">
+                    {travail.agent_name ? (
+                      travail.agent_name
+                    ) : (
+                      <span style={{color: '#aaa'}}>Aucun</span>
+                    )}
+                  </td>
                   <td className="projects-table-cell projects-action-cell">
                     <div className="action-buttons-container">
                       <button
@@ -157,6 +170,14 @@ const ProjectsResponsable = () => {
           </tbody>
         </table>
       </div>
+      
+      {/* Affect Agent Modal */}
+      <AffectAgent
+        isOpen={showAffectModal}
+        onClose={() => setShowAffectModal(false)}
+        travailId={selectedTravailId}
+        onSuccess={handleAffectSuccess}
+      />
     </div>
   );
 };

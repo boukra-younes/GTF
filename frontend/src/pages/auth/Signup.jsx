@@ -194,9 +194,8 @@ const Signup = () => {
               <label htmlFor="accountType">Account Type</label>
               <select id="accountType" {...register("accountType")}>
                 <option value="">Select account type</option>
-                <option value="chef">Chef</option>
-                <option value="admin">Admin</option>
-                <option value="user">User</option>
+                <option value="agent">agent</option>
+                <option value="responsable">responsable</option>
               </select>
               {errors.accountType && (
                 <span className="error-text">{errors.accountType.message}</span>

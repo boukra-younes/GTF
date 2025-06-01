@@ -12,7 +12,10 @@ if (!isset($_SESSION['user'])) {
     exit();
 }
 
-$query = "SELECT id, titre, description, date_debut, date_fin, status, agents_affectes_id FROM travail";
+$query = "SELECT t.id, t.titre, t.description, t.date_debut, t.date_fin, t.status, 
+                 t.agents_affectes_id, u.fname as agent_name 
+          FROM travail t 
+          LEFT JOIN users u ON t.agents_affectes_id = u.id";
 $result = $conn->query($query);
 
 $travails = [];
@@ -23,4 +26,4 @@ if ($result) {
 }
 
 echo json_encode($travails);
-$conn->close(); 
+$conn->close();

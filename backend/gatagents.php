@@ -1,9 +1,12 @@
 <?php
 // CORS headers
-header("Access-Control-Allow-Origin: *");
+include('config.php');
+include('log_activity.php');
+header("Access-Control-Allow-Origin: http://localhost:5173");
+header("Access-Control-Allow-Methods: POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
-header("Access-Control-Allow-Methods: GET, OPTIONS");
 header("Content-Type: application/json");
+header("Access-Control-Allow-Credentials: true");
 
 // Handle preflight request
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
@@ -14,18 +17,19 @@ include('config.php');
 
 // Join users with agents to get agent-specific status
 $query = "
-    SELECT 
-        users.iduser,
-        users.fname,
-        users.email,
-        users.status AS user_status,
-        agents.status AS agent_status
-    FROM 
-        users
-    INNER JOIN 
-        agents ON users.iduser = agents.user_id
-    WHERE 
-        users.role = 'agent'
+  SELECT 
+    u.id,
+    u.fname,
+    u.email,
+    u.status AS user_status,
+    a.status AS agent_status
+FROM 
+    users u
+INNER JOIN 
+    agents a ON u.id = a.agent_id 
+WHERE 
+    u.role = 'agent'
+    AND a.status = 'free';
 ";
 
 $stmt = $conn->prepare($query);

@@ -131,7 +131,7 @@ const SideBar = ({ user, initialExpanded = false }) => {
             onClick={() => handleItemClick("activity")}
           >
             <MessageSquare size={20} />
-            {expanded && <span>Message</span>}
+            {expanded && <span>logs</span>}
           </li>
           <li
             className={activeItem === "settings" ? "active" : ""}

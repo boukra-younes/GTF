@@ -1,7 +1,8 @@
 /* Import Montserrat from Google Fonts */
-@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap");
+
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
@@ -17,6 +18,7 @@
 ::-webkit-scrollbar-thumb:hover {
   background: var(--primary-hover);
 }
+
 /* Color variables for light mode */
 :root {
   --primary-color: #27ae60;
@@ -27,21 +29,32 @@
   --accent-color: #2ecc71;
   --accent-hover: #27ae60;
   --text-color: #2c3e50;
+  --text-secondary: #7f8c8d;
   --bg-color: #ffffff;
+  --card-bg: #ffffff;
   --input-bg: #f8f9fa;
   --border-color: #e0e0e0;
   --shadow-color: rgba(0, 0, 0, 0.1);
   --success-bg: #d4edda;
   --success-text: #155724;
+  --success-color: #28a745;
   --error-bg: #f8d7da;
   --error-text: #721c24;
+  --error-color: #dc3545;
   --neutral-light: #f5f6fa;
+  --neutral-medium: #e9ecef;
   --neutral-dark: #2f3640;
   --warning-bg: #fff3cd;
   --warning-text: #856404;
+  --warning-color: #ffc107;
   --info-bg: #d1ecf1;
   --info-text: #0c5460;
+  --info-color: #17a2b8;
   --font-family: 'Montserrat', 'Poppins', sans-serif;
+  --border-radius-sm: 4px;
+  --border-radius: 8px;
+  --border-radius-lg: 12px;
+  --transition-speed: 0.3s;
 }
 
 /* Color variables for dark mode */
@@ -54,20 +67,27 @@
   --accent-color: #00b894;
   --accent-hover: #00a885;
   --text-color: #ecf0f1;
+  --text-secondary: #bdc3c7;
   --bg-color: #1a1a1a;
+  --card-bg: #2d3436;
   --input-bg: #2d2d2d;
   --border-color: #404040;
   --shadow-color: rgba(0, 0, 0, 0.3);
   --success-bg: #1e4620;
   --success-text: #d4edda;
+  --success-color: #28a745;
   --error-bg: #4a1c1c;
   --error-text: #f8d7da;
+  --error-color: #dc3545;
   --neutral-light: #2d3436;
+  --neutral-medium: #3d4246;
   --neutral-dark: #dfe6e9;
   --warning-bg: #4a3c1c;
   --warning-text: #ffe082;
+  --warning-color: #ffc107;
   --info-bg: #22313f;
   --info-text: #81d4fa;
+  --info-color: #17a2b8;
   --font-family: 'Montserrat', 'Poppins', sans-serif;
 }
 
@@ -75,4 +95,30 @@
 * {
   font-family: var(--font-family);
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+}
+
+button, input, select, textarea {
+  font-family: var(--font-family);
+}
+
+/* Common utility classes */
+.card {
+  background-color: var(--card-bg);
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 6px var(--shadow-color);
+  padding: 1.5rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px var(--shadow-color);
 }
