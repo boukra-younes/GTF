@@ -104,6 +104,14 @@ if (!$updateQuery) {
 $updateQuery->bind_param("ii", $agent_id, $travail_id);
 
 if ($updateQuery->execute()) {
+    $updateQuery = $conn->prepare("UPDATE agents SET status = 'busy' WHERE agent_id = ?");
+if (!$updateQuery) {
+    echo json_encode(["success" => false, "message" => "Database error: " . $conn->error]);
+    exit();
+}
+
+$updateQuery->bind_param("i", $agent_id);
+$updateQuery->execute();
     // Log the activity
     $description = "Assigned agent {$agent['fname']} ({$agent['email']}) to travail '{$travail['titre']}' (ID: {$travail_id})";
     logUserActivity($_SESSION['user']['id'], 'assign_agent', $description);
