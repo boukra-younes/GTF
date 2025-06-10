@@ -1,0 +1,231 @@
+.agent-travail-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+.agent-travail-header {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.agent-travail-title {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  color: var(--text-color);
+}
+
+.agent-travail-subtitle {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  margin-top: 0;
+}
+
+.agent-travail-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 1.5rem;
+}
+
+.agent-travail-card {
+  background: var(--card-bg);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid var(--border-color);
+}
+
+.agent-travail-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.agent-travail-card-header {
+  padding: 1.25rem;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.agent-travail-card-title {
+  margin: 0;
+  font-size: 1.25rem;
+  color: var(--text-color);
+}
+
+.agent-travail-status {
+  padding: 0.35rem 0.75rem;
+  border-radius: 50px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.agent-travail-status.pending {
+  background-color: var(--warning-bg);
+  color: var(--warning-color);
+}
+
+.agent-travail-status.in_progress {
+  background-color: var(--info-bg);
+  color: var(--info-color);
+}
+
+.agent-travail-status.completed {
+  background-color: var(--success-bg);
+  color: var(--success-color);
+}
+
+.agent-travail-card-body {
+  padding: 1.25rem;
+}
+
+.agent-travail-description {
+  color: var(--text-secondary);
+  margin-top: 0;
+  margin-bottom: 1.25rem;
+  line-height: 1.5;
+}
+
+.agent-travail-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.agent-travail-detail {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.agent-travail-icon {
+  color: var(--primary-color);
+}
+
+.agent-travail-detail .overdue {
+  color: var(--error-color);
+  font-weight: 500;
+}
+
+.agent-travail-card-footer {
+  padding: 1.25rem;
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+}
+
+.agent-travail-complete-btn,
+.agent-travail-brh-btn {
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  border: none;
+}
+
+.agent-travail-brh-btn {
+  background-color: var(--info-bg);
+  color: var(--info-color);
+  flex: 1;
+}
+
+.agent-travail-brh-btn:hover {
+  background-color: var(--info-hover);
+}
+
+.agent-travail-complete-btn {
+  background-color: var(--success-bg);
+  color: var(--success-color);
+  flex: 1;
+}
+
+.agent-travail-complete-btn:hover {
+  background-color: var(--success-hover);
+}
+
+.agent-travail-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  text-align: center;
+}
+
+.agent-travail-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(0, 0, 0, 0.1);
+  border-top-color: var(--primary-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.agent-travail-error {
+  background-color: var(--error-bg);
+  color: var(--error-text);
+  padding: 1.5rem;
+  border-radius: 8px;
+  text-align: center;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.agent-travail-retry-btn {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  margin-top: 1rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.agent-travail-retry-btn:hover {
+  background-color: var(--primary-hover);
+}
+
+.agent-travail-empty {
+  text-align: center;
+  padding: 3rem;
+  color: var(--text-secondary);
+  background-color: var(--card-bg);
+  border-radius: 8px;
+  border: 1px dashed var(--border-color);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .agent-travail-list {
+    grid-template-columns: 1fr;
+  }
+  
+  .agent-travail-card-footer {
+    flex-direction: column;
+  }
+  
+  .agent-travail-complete-btn,
+  .agent-travail-brh-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}

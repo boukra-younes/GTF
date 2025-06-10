@@ -1,0 +1,79 @@
+.agent-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-color);
+}
+  
+.agent-container {
+  flex: 1;
+  padding: 2rem;
+  overflow: auto;
+  width: 100%;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+}
+
+/* Dark mode styles */
+.dark-mode {
+  --bg-color: #1a1a2e;
+  --card-bg: #16213e;
+  --text-color: #e6e6e6;
+  --text-secondary: #b0b0b0;
+  --border-color: #2a2a4a;
+  --primary-color: #4ecca3;
+  --primary-hover: #3db28f;
+  --input-bg: #242444;
+  --button-secondary-bg: #2a2a4a;
+  --button-secondary-text: #e6e6e6;
+  --button-secondary-hover: #3a3a5a;
+  --success-bg: rgba(46, 204, 113, 0.15);
+  --success-color: #2ecc71;
+  --success-hover: rgba(46, 204, 113, 0.25);
+  --warning-bg: rgba(241, 196, 15, 0.15);
+  --warning-color: #f1c40f;
+  --warning-hover: rgba(241, 196, 15, 0.25);
+  --error-bg: rgba(231, 76, 60, 0.15);
+  --error-color: #e74c3c;
+  --error-text: #e74c3c;
+  --error-hover: rgba(231, 76, 60, 0.25);
+  --info-bg: rgba(52, 152, 219, 0.15);
+  --info-color: #3498db;
+  --info-hover: rgba(52, 152, 219, 0.25);
+}
+
+/* Light mode styles */
+.light-mode {
+  --bg-color: #f5f7fa;
+  --card-bg: #ffffff;
+  --text-color: #333333;
+  --text-secondary: #666666;
+  --border-color: #e0e0e0;
+  --primary-color: #2ecc71;
+  --primary-hover: #27ae60;
+  --input-bg: #ffffff;
+  --button-secondary-bg: #f0f0f0;
+  --button-secondary-text: #333333;
+  --button-secondary-hover: #e0e0e0;
+  --success-bg: rgba(46, 204, 113, 0.1);
+  --success-color: #27ae60;
+  --success-hover: rgba(46, 204, 113, 0.2);
+  --warning-bg: rgba(241, 196, 15, 0.1);
+  --warning-color: #f39c12;
+  --warning-hover: rgba(241, 196, 15, 0.2);
+  --error-bg: rgba(231, 76, 60, 0.1);
+  --error-color: #c0392b;
+  --error-text: #c0392b;
+  --error-hover: rgba(231, 76, 60, 0.2);
+  --info-bg: rgba(52, 152, 219, 0.1);
+  --info-color: #2980b9;
+  --info-hover: rgba(52, 152, 219, 0.2);
+}
+
+@media (max-width: 768px) {
+  .agent-container {
+    padding: 1rem;
+  }
+}

@@ -22,7 +22,7 @@ $route = $data['route'];
 $allowedRoutes = [
         'admin' => ['/admin','/admin/users','/admin/pending','/admin/activity','/admin/settings','/admin/dashboard', '/admin/notifications', '/home'],
         'responsable' => ['/responsable', '/responsable/dashboard','/responsable/add','/responsable/notifications','/responsable/projects'],
-    'chef' => ['/doctor', '/appointments'],
+        'agent' => ['/agent', '/agent/tasks','/agent/notifications'],
 ];
 
 // Check session

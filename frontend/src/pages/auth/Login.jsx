@@ -62,11 +62,11 @@ const Login = () => {
           case "responsable":
             navigate("/responsable");
             break;
-          case "chef":
-            navigate("/");
+          case "agent":
+            navigate("/agent/tasks");
             break;
           default:
-            navigate("/dashboard");
+            navigate("/");
             break;
         }
       }

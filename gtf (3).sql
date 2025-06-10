@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 01, 2025 at 05:03 AM
+-- Generation Time: Jun 10, 2025 at 08:10 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -40,8 +40,29 @@ CREATE TABLE `agents` (
 
 INSERT INTO `agents` (`agent_id`, `status`) VALUES
 (14, 'busy'),
-(15, 'free'),
+(15, 'busy'),
 (26, 'busy');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `brh_forms`
+--
+
+CREATE TABLE `brh_forms` (
+  `id` int(11) NOT NULL,
+  `travail_id` int(11) NOT NULL,
+  `agent_id` int(11) NOT NULL,
+  `week_number` int(11) NOT NULL,
+  `year` int(4) NOT NULL,
+  `volume_prevu` float NOT NULL,
+  `nbr_ouvriers` int(11) NOT NULL,
+  `moyens_materiel` text NOT NULL,
+  `volume_realise` float NOT NULL,
+  `volume_restant` float NOT NULL,
+  `observation` text DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -65,7 +86,7 @@ INSERT INTO `notifications` (`id`, `user_id`, `message`, `is_read`, `created_at`
 (22, 6, 'New user registration: mohamed (moha@mail.com)', 0, '2025-05-28 12:59:06'),
 (23, 6, 'New user registration: amine (amine@mail.com)', 0, '2025-06-01 00:36:57'),
 (25, 6, 'New user registration: nes (nes@mail.com)', 0, '2025-06-01 00:40:43'),
-(32, 6, 'New user registration: nes (ne@mail.com)', 0, '2025-06-01 00:54:21');
+(33, 6, 'New user registration: crzfzr (tima@gmail.com)', 0, '2025-06-10 11:50:27');
 
 -- --------------------------------------------------------
 
@@ -91,8 +112,9 @@ CREATE TABLE `travail` (
 --
 
 INSERT INTO `travail` (`id`, `titre`, `description`, `location`, `date_debut`, `date_fin`, `responsable_id`, `agents_affectes_id`, `status`, `created_at`) VALUES
-(16, 'plantation', 'lutte contre la deforestation', NULL, '2025-05-13', '2026-05-12', 12, 14, 'in_progress', '2025-05-31'),
-(20, 'plantation', 'lutte contre la deforestation', NULL, '2025-05-13', '2026-05-12', 12, 26, 'in_progress', '2025-05-31');
+(21, 'testt', 'tcrytvubyiunoi,pk', NULL, '2025-06-18', '2025-06-26', 12, 26, 'in_progress', '2025-06-10'),
+(22, 'test', 'fffdfdfd', NULL, '2025-06-17', '2025-06-28', 12, 14, 'in_progress', '2025-06-10'),
+(23, 'rrrr', 'hgdhtdtst', NULL, '2025-06-20', '2025-06-24', 12, 15, 'in_progress', '2025-06-10');
 
 -- --------------------------------------------------------
 
@@ -116,12 +138,11 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `fname`, `email`, `password`, `role`, `status`) VALUES
 (6, 'fatima benchenina', 'tima@mail.com', '$2y$10$jWRLtuci6FwOVKGm2Su1we.Tkmx0XFd.6GSl8Uyds50VYTINj8y3W', 'admin', 'active'),
 (12, 'fatima', 'fatima2@mail.com', '$2y$10$A7ngQ0GVqb/wU6NVSNLG4uFNjJyXhVyMHAj7MO6rKvYGrIjr9wVU.', 'responsable', 'active'),
-(13, 'mansouria hamdi ', 'mansouriahamdi@mail.com', '$2y$10$HWWYjuAppw4XunQDCUBwc.NfkS5Fw.FqUOp/3T4L/W1TkxYg2e5Ey', 'responsable', 'active'),
-(14, 'rian hamdi', 'rian@gmail.com', '$2y$10$Kvj2Z59Qm10ysq9Ipy.3Oe9WohigvMIqgjniw8q.IL7tmcM.0ySdG', 'agent', 'active'),
+(13, 'mansouria hamdi ', 'mansouriahamdi@mail.com', '$2y$10$HWWYjuAppw4XunQDCUBwc.NfkS5Fw.FqUOp/3T4L/W1TkxYg2e5Ey', 'responsable', 'pending'),
+(14, 'rian hamdi', 'rian@gmail.com', '$2y$10$Kvj2Z59Qm10ysq9Ipy.3Oe9WohigvMIqgjniw8q.IL7tmcM.0ySdG', 'agent', 'pending'),
 (15, 'sara ber', 'sara@mail.com', '$2y$10$JU./gz2QUdxEN.CEeYWNtuEnHYPh5XfCNynnZtqpjXglXa7TcjzBq', 'agent', 'active'),
 (16, 'mohamed', 'moha@mail.com', '$2y$10$gNRRzJuUgr3o0mdI9PfzeesXpqGAWVhH25vE9Dt/nsqmeLr2GUsWu', 'agent', 'active'),
-(18, 'amine', 'amine@mail.com', '$2y$10$YhrJ4nbukdurx4c30hgVJ.1CuhcfAb2Mg8xo/FPVOMwzlzZrFh1MK', 'agent', 'pending'),
-(19, 'nes', 'nes@mail.com', '$2y$10$yCFXyXRASV8UPEL8icaZ6.461q5ZScZnWFkNtqjFKMEjBOGPuoQy2', 'agent', 'pending'),
+(19, 'nes', 'nes@mail.com', '$2y$10$yCFXyXRASV8UPEL8icaZ6.461q5ZScZnWFkNtqjFKMEjBOGPuoQy2', 'agent', 'active'),
 (26, 'nes', 'ne@mail.com', '$2y$10$YLlaNPFQUngz6r..lmsPWuW51YyE4whJ.Pfbe0SzPefybpcHZZ1V2', 'agent', 'active');
 
 -- --------------------------------------------------------
@@ -276,7 +297,6 @@ INSERT INTO `user_activity` (`id`, `user_id`, `action_type`, `description`, `ip_
 (166, 6, 'logout', 'User logged out', NULL, '2025-05-31 23:28:16'),
 (167, 12, 'login', 'User logged in', NULL, '2025-05-31 23:28:29'),
 (168, 12, 'delete_user', 'Deleted Project: 19', NULL, '2025-05-31 23:28:38'),
-(170, 18, 'signup', 'New user registration', NULL, '2025-06-01 00:38:18'),
 (171, 19, 'signup', 'New user registration', NULL, '2025-06-01 00:40:43'),
 (178, 26, 'signup', 'New user registration', NULL, '2025-06-01 00:54:21'),
 (179, 12, 'assign_agent', 'Assigned agent rian hamdi (rian@gmail.com) to travail \'plantation\' (ID: 16)', NULL, '2025-06-01 02:09:56'),
@@ -287,7 +307,51 @@ INSERT INTO `user_activity` (`id`, `user_id`, `action_type`, `description`, `ip_
 (184, 12, 'login', 'User logged in', NULL, '2025-06-01 02:33:42'),
 (185, 12, 'assign_agent', 'Assigned agent sara ber (sara@mail.com) to travail \'plantation\' (ID: 16)', NULL, '2025-06-01 02:39:34'),
 (186, 12, 'assign_agent', 'Assigned agent rian hamdi (rian@gmail.com) to travail \'plantation\' (ID: 16)', NULL, '2025-06-01 02:54:54'),
-(187, 12, 'assign_agent', 'Assigned agent nes (ne@mail.com) to travail \'plantation\' (ID: 20)', NULL, '2025-06-01 02:55:39');
+(187, 12, 'assign_agent', 'Assigned agent nes (ne@mail.com) to travail \'plantation\' (ID: 20)', NULL, '2025-06-01 02:55:39'),
+(188, 12, 'login', 'User logged in', NULL, '2025-06-01 11:34:24'),
+(189, 12, 'logout', 'User logged out', NULL, '2025-06-01 12:00:05'),
+(190, 6, 'login', 'User logged in', NULL, '2025-06-01 12:01:25'),
+(191, 6, 'approve_user', 'Admin approved user ID: 19', NULL, '2025-06-01 12:01:30'),
+(192, 6, 'logout', 'User logged out', NULL, '2025-06-01 12:01:34'),
+(193, 19, 'login', 'User logged in', NULL, '2025-06-01 12:01:45'),
+(194, 6, 'login', 'User logged in', NULL, '2025-06-10 09:54:18'),
+(195, 6, 'logout', 'User logged out', NULL, '2025-06-10 09:54:47'),
+(196, 12, 'login', 'User logged in', NULL, '2025-06-10 10:07:03'),
+(197, 12, 'delete_user', 'Deleted Project: 16', NULL, '2025-06-10 10:07:13'),
+(198, 12, 'travail_created', 'Created new travail: testt', NULL, '2025-06-10 10:08:03'),
+(199, 12, 'logout', 'User logged out', NULL, '2025-06-10 10:09:31'),
+(200, 16, 'login', 'User logged in', NULL, '2025-06-10 10:09:37'),
+(201, 16, 'login', 'User logged in', NULL, '2025-06-10 10:11:21'),
+(202, 16, 'login', 'User logged in', NULL, '2025-06-10 10:11:50'),
+(203, 16, 'login', 'User logged in', NULL, '2025-06-10 10:12:40'),
+(204, 16, 'logout', 'User logged out', NULL, '2025-06-10 10:13:25'),
+(205, 19, 'login', 'User logged in', NULL, '2025-06-10 10:14:29'),
+(206, 19, 'login', 'User logged in', NULL, '2025-06-10 10:28:06'),
+(207, 6, 'login', 'User logged in', NULL, '2025-06-10 11:11:30'),
+(208, 6, 'delete_user', 'Admin deleted user: amine (amine@mail.com)', NULL, '2025-06-10 11:16:02'),
+(209, 6, 'logout', 'User logged out', NULL, '2025-06-10 11:17:06'),
+(210, 19, 'login', 'User logged in', NULL, '2025-06-10 11:20:39'),
+(211, 19, 'logout', 'User logged out', NULL, '2025-06-10 11:21:23'),
+(212, 19, 'login', 'User logged in', NULL, '2025-06-10 11:21:54'),
+(213, 19, 'login', 'User logged in', NULL, '2025-06-10 11:22:55'),
+(214, 6, 'login', 'User logged in', NULL, '2025-06-10 11:48:47'),
+(215, 6, 'logout', 'User logged out', NULL, '2025-06-10 11:49:59'),
+(217, 12, 'login', 'User logged in', NULL, '2025-06-10 12:07:37'),
+(218, 12, 'travail_created', 'Created new travail: test', NULL, '2025-06-10 12:09:14'),
+(219, 12, 'assign_agent', 'Assigned agent nes (ne@mail.com) to travail \'testt\' (ID: 21)', NULL, '2025-06-10 12:13:50'),
+(220, 12, 'assign_agent', 'Assigned agent rian hamdi (rian@gmail.com) to travail \'test\' (ID: 22)', NULL, '2025-06-10 12:16:34'),
+(221, 6, 'login', 'User logged in', NULL, '2025-06-10 12:20:48'),
+(222, 6, 'logout', 'User logged out', NULL, '2025-06-10 12:25:40'),
+(223, 6, 'login', 'User logged in', NULL, '2025-06-10 12:27:50'),
+(224, 6, 'deactivate_user', 'Admin deactivated user ID: 13', NULL, '2025-06-10 12:32:15'),
+(225, 6, 'deactivate_user', 'Admin deactivated user ID: 14', NULL, '2025-06-10 12:32:17'),
+(226, 6, 'logout', 'User logged out', NULL, '2025-06-10 12:33:19'),
+(227, 12, 'login', 'User logged in', NULL, '2025-06-10 12:33:55'),
+(228, 12, 'delete_user', 'Deleted Project: 20', NULL, '2025-06-10 12:34:33'),
+(229, 12, 'travail_created', 'Created new travail: rrrr', NULL, '2025-06-10 12:35:49'),
+(230, 12, 'assign_agent', 'Assigned agent sara ber (sara@mail.com) to travail \'rrrr\' (ID: 23)', NULL, '2025-06-10 12:36:01'),
+(231, 12, 'login', 'User logged in', NULL, '2025-06-10 17:25:49'),
+(232, 12, 'logout', 'User logged out', NULL, '2025-06-10 17:48:18');
 
 --
 -- Indexes for dumped tables
@@ -298,6 +362,14 @@ INSERT INTO `user_activity` (`id`, `user_id`, `action_type`, `description`, `ip_
 --
 ALTER TABLE `agents`
   ADD PRIMARY KEY (`agent_id`);
+
+--
+-- Indexes for table `brh_forms`
+--
+ALTER TABLE `brh_forms`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `travail_id` (`travail_id`),
+  ADD KEY `agent_id` (`agent_id`);
 
 --
 -- Indexes for table `notifications`
@@ -335,28 +407,34 @@ ALTER TABLE `user_activity`
 --
 
 --
+-- AUTO_INCREMENT for table `brh_forms`
+--
+ALTER TABLE `brh_forms`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `notifications`
 --
 ALTER TABLE `notifications`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `travail`
 --
 ALTER TABLE `travail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `user_activity`
 --
 ALTER TABLE `user_activity`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=188;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=233;
 
 --
 -- Constraints for dumped tables
@@ -367,6 +445,13 @@ ALTER TABLE `user_activity`
 --
 ALTER TABLE `agents`
   ADD CONSTRAINT `agents_ibfk_1` FOREIGN KEY (`agent_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `brh_forms`
+--
+ALTER TABLE `brh_forms`
+  ADD CONSTRAINT `brh_forms_ibfk_1` FOREIGN KEY (`travail_id`) REFERENCES `travail` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `brh_forms_ibfk_2` FOREIGN KEY (`agent_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `notifications`
