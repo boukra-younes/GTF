@@ -51,8 +51,47 @@
 
 .form-row {
   display: flex;
-  gap: 1.5rem;
-  margin-bottom: 0.5rem;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+.col-md-6 {
+  flex: 0 0 50%;
+  max-width: 50%;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+.map-container {
+  margin-bottom: 2rem;
+}
+
+.selected-location {
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+}
+
+.selected-location p {
+  margin: 0;
+  color: #666;
+}
+
+/* Dark theme support */
+.dark-theme .selected-location {
+  background-color: #2d3436;
+  color: #fff;
+}
+
+.dark-theme .selected-location p {
+  color: #ddd;
 }
 
 .form-row .form-group {
@@ -204,4 +243,43 @@ textarea.form-control {
   .btn-primary {
     padding: 0.8rem 1.5rem;
   }
+}
+
+.map-container {
+  margin-bottom: 1.5rem;
+}
+
+.map-container label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--text-color);
+  font-weight: 500;
+}
+
+.selected-location {
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  background-color: var(--bg-color);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+/* Fix Leaflet marker icon issue */
+.leaflet-default-icon-path {
+  background-image: url(https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png);
+}
+
+[data-theme="dark"] .leaflet-container {
+  background-color: #242424;
+}
+
+[data-theme="dark"] .leaflet-tile {
+  filter: brightness(0.6) invert(1) contrast(3) hue-rotate(200deg) saturate(0.3) brightness(0.7);
+}
+
+[data-theme="dark"] .leaflet-control-attribution {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
 }

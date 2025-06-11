@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 $currentUserId = isset($_SESSION['user']) ? $_SESSION['user']['id'] : null;
 
 // Query to get all users except the current one
-$query = "SELECT id, fname, email, status FROM users WHERE id != ?";
+$query = "SELECT id, fname, email,role, status FROM users WHERE id != ?";
 
 if ($currentUserId) {
     

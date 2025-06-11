@@ -12,7 +12,7 @@ if (!isset($_SESSION['user'])) {
     exit();
 }
 
-$query = "SELECT t.id, t.titre, t.description, t.date_debut, t.date_fin, t.status, 
+$query = "SELECT t.id, t.titre, t.description, t.location, t.date_debut, t.date_fin, t.status, 
                  t.agents_affectes_id, u.fname as agent_name 
           FROM travail t 
           LEFT JOIN users u ON t.agents_affectes_id = u.id";

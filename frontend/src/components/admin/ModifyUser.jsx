@@ -4,6 +4,7 @@ import "./ModifyUser.css";
 const ModifyUser = ({ user, onClose, onUpdate, action }) => {
   const [fname, setFname] = useState(user.fname);
   const [email, setEmail] = useState(user.email);
+  const [role, setRole] = useState(user.role);
   const [message, setMessage] = useState("");
 
   const handleSubmit = async (e) => {
@@ -22,6 +23,7 @@ const ModifyUser = ({ user, onClose, onUpdate, action }) => {
             id: user.id,
             fname,
             email,
+            role,
           }),
         }
       );
@@ -100,6 +102,19 @@ const ModifyUser = ({ user, onClose, onUpdate, action }) => {
             placeholder="Email"
             required
           />
+      
+      <div className="input-group">
+             
+              <select id="accountType" defaultValue={role} onChange={(e) => setRole(e.target.value)} >
+                <option value="">Select account type</option>
+                <option value="agent">agent</option>
+                <option value="responsable">responsable</option>
+                <option value="admin">admin</option>
+              </select>
+             
+            </div>
+
+
           <div className="buttons">
             <button type="submit">Update</button>
             <button type="button" onClick={onClose}>

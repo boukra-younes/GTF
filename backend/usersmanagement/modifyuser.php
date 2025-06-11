@@ -14,13 +14,14 @@ if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'admin') {
 $id = $input['id'] ?? null;
 $fname = $input['fname'] ?? null;
 $email = $input['email'] ?? null;
+$role = $input['role'] ?? null;
 if (!$id || !$fname || !$email) {
     echo json_encode(["success" => false, "message" => "Missing fields" , "id" => $id, "fname" => $fname, "email" => $email]);
     exit();
 }
 
-$stmt = $conn->prepare("UPDATE users SET fname = ?, email = ? WHERE id = ?");
-$stmt->bind_param("ssi", $fname, $email, $id);
+$stmt = $conn->prepare("UPDATE users SET fname = ?, email = ? ,role=?  WHERE id = ?");
+$stmt->bind_param("sssi", $fname, $email,$role, $id);
 
 if ($stmt->execute()) {
     // Log the user modification activity

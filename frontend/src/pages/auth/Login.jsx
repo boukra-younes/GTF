@@ -57,10 +57,10 @@ const Login = () => {
         console.log(userData);
         switch (result.role) {
           case "admin":
-            navigate("/admin");
+            navigate("/admin/dashboard");
             break;
           case "responsable":
-            navigate("/responsable");
+            navigate("/responsable/map");
             break;
           case "agent":
             navigate("/agent/tasks");

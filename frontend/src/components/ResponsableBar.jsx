@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation,useNavigate } from 'react-router-dom';
-import { FaSun, FaMoon, FaBars, FaTimes, FaProjectDiagram, FaNewspaper, FaBullhorn, FaBell, FaUser, FaSignOutAlt,FaPlus  } from 'react-icons/fa';
+import { FaSun, FaMoon, FaBars, FaTimes, FaProjectDiagram, FaNewspaper, FaBullhorn, FaBell, FaUser, FaSignOutAlt,FaPlus, FaMap  } from 'react-icons/fa';
 import './ResponsableBar.css';
 
 const ResponsableBar = ({ theme, toggleTheme,user }) => {
@@ -14,23 +14,26 @@ const ResponsableBar = ({ theme, toggleTheme,user }) => {
 
   const menuItems = [
     { path: 'projects', icon: <FaProjectDiagram />, label: 'Projects' },
-    { path: 'news', icon: <FaNewspaper />, label: 'News' },
+    { path: 'map', icon: <FaMap />, label: 'Map' },
     { path: 'campaigns', icon: <FaBullhorn />, label: 'Campaigns' },
     { path: 'add', icon: <FaPlus  />, label: 'add' },
   ];
 
-  const onLogout = async () => {
-    try {
-      await fetch("http://localhost/GTF/backend/logout.php", {
-        method: "GET",
-        credentials: "include",
-      });
-      // Redirect to login page after successful logout
-      navigate("/");
-    } catch (error) {
-      console.error("Logout failed:", error);
-    }
-  };
+    const onLogout = async () => {
+      try {
+        const response = await fetch("http://localhost/GTF/backend/logout.php", {
+          method: "POST",
+          credentials: "include",
+        });
+       
+       
+          setUser(null);
+          navigate("/");
+        
+      } catch (error) {
+        console.error("Logout failed:", error);
+      }
+    };
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (profileMenuRef.current && !profileMenuRef.current.contains(event.target)) {

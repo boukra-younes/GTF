@@ -25,11 +25,11 @@ const AgentBar = ({ theme, toggleTheme, user }) => {
         method: "POST",
         credentials: "include",
       });
-      const data = await response.json();
-      if (data.success) {
+     
+     
         setUser(null);
-        navigate("/login");
-      }
+        navigate("/");
+      
     } catch (error) {
       console.error("Logout failed:", error);
     }

@@ -2,13 +2,17 @@ import React, { useEffect, useState } from "react";
 import "./ProjectsResponsable.css";
 import { FiEdit, FiUserPlus, FiTrash2 } from "react-icons/fi";
 import AffectAgent from "./AffectAgent";
+import EditTravail from "./EditTravail";
 
 const ProjectsResponsable = () => {
   const [travails, setTravails] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [showAffectModal, setShowAffectModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
   const [selectedTravailId, setSelectedTravailId] = useState(null);
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [travailToDelete, setTravailToDelete] = useState(null);
 
   const fetchTravails = async () => {
     setLoading(true);
@@ -37,8 +41,12 @@ const ProjectsResponsable = () => {
   }, []);
 
   const handleEdit = (id) => {
-    // TODO: Implement edit modal or navigation
-    alert(`Edit travail ${id}`);
+    setSelectedTravailId(id);
+    setShowEditModal(true);
+  };
+
+  const handleEditSuccess = () => {
+    fetchTravails(); // Refresh the table
   };
 
   const handleAffect = (id) => {
@@ -50,7 +58,14 @@ const ProjectsResponsable = () => {
     fetchTravails(); // Refresh the table
   };
 
-  const handleDelete = async (id) => {
+  const handleDeleteClick = (travail) => {
+    setTravailToDelete(travail);
+    setShowDeleteConfirm(true);
+  };
+
+  const handleDeleteConfirm = async () => {
+    if (!travailToDelete) return;
+    
     try {
       const response = await fetch(
         "http://localhost/GTF/backend/deletetravail.php",
@@ -60,7 +75,7 @@ const ProjectsResponsable = () => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ id }),
+          body: JSON.stringify({ id: travailToDelete.id }),
         }
       );
       const result = await response.json();
@@ -71,6 +86,9 @@ const ProjectsResponsable = () => {
       }
     } catch (err) {
       console.log("Error deleting travail");
+    } finally {
+      setShowDeleteConfirm(false);
+      setTravailToDelete(null);
     }
   };
 
@@ -157,7 +175,7 @@ const ProjectsResponsable = () => {
                       )}
                       <button
                         className="icon-action-button delete-icon-button"
-                        onClick={() => handleDelete(travail.id)}
+                        onClick={() => handleDeleteClick(travail)}
                         title="Supprimer"
                       >
                         <FiTrash2 />
@@ -177,6 +195,56 @@ const ProjectsResponsable = () => {
         onClose={() => setShowAffectModal(false)}
         travailId={selectedTravailId}
         onSuccess={handleAffectSuccess}
+      />
+      
+      {/* Add EditTravail Modal */}
+      <EditTravail
+        isOpen={showEditModal}
+        onClose={() => setShowEditModal(false)}
+        travailId={selectedTravailId}
+        onSuccess={handleEditSuccess}
+      />
+      
+      {/* Delete Confirmation Modal */}
+      {showDeleteConfirm && (
+        <div className="modal-overlay">
+          <div className="confirmation-modal">
+            <h3>Confirmer la suppression</h3>
+            <p>Êtes-vous sûr de vouloir supprimer le travail "{travailToDelete?.titre}" ?</p>
+            <div className="confirmation-buttons">
+              <button
+                className="cancel-button"
+                onClick={() => {
+                  setShowDeleteConfirm(false);
+                  setTravailToDelete(null);
+                }}
+              >
+                Annuler
+              </button>
+              <button
+                className="confirm-button"
+                onClick={handleDeleteConfirm}
+              >
+                Confirmer
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Existing Modals */}
+      <AffectAgent
+        isOpen={showAffectModal}
+        onClose={() => setShowAffectModal(false)}
+        travailId={selectedTravailId}
+        onSuccess={handleAffectSuccess}
+      />
+      
+      <EditTravail
+        isOpen={showEditModal}
+        onClose={() => setShowEditModal(false)}
+        travailId={selectedTravailId}
+        onSuccess={handleEditSuccess}
       />
     </div>
   );

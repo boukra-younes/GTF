@@ -42,15 +42,16 @@ foreach ($required as $field) {
 try {
     // Prepare SQL statement
     $stmt = $conn->prepare("INSERT INTO travail 
-        (responsable_id, titre, description, date_debut, date_fin, status, created_at)
-        VALUES (?, ?, ?, ?, ?, 'pending', NOW())");
+        (responsable_id, titre, description, date_debut, date_fin, status, created_at,location)
+        VALUES (?, ?, ?, ?, ?,  'pending', NOW(),?)");
 
-    $stmt->bind_param("issss", 
+    $stmt->bind_param("isssss", 
         $_SESSION['user']['id'],
         $data['title'],
         $data['description'],
         $data['start_date'],
-        $data['end_date']
+        $data['end_date'],
+        $data['location']
     );
 
     if ($stmt->execute()) {

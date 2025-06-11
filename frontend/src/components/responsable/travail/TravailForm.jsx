@@ -3,6 +3,8 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { UserContext } from "../../../contexts/UserContext";
+import { MapContainer, TileLayer, Marker, useMapEvents } from 'react-leaflet';
+import 'leaflet/dist/leaflet.css';
 import "./TravailForm.css";
 
 // Define Zod schema for validation
@@ -21,24 +23,49 @@ const schema = z.object({
   status: z.string().min(1, "Please select a status"),
 });
 
+// Map marker component with click handler
+function LocationMarker({ onLocationSelect }) {
+  const [position, setPosition] = useState(null);
+
+  const map = useMapEvents({
+    click(e) {
+      const newPos = e.latlng;
+      setPosition(newPos);
+      onLocationSelect(newPos);
+      map.flyTo(newPos, map.getZoom());
+    },
+  });
+
+  return position === null ? null : (
+    <Marker position={position}></Marker>
+  );
+}
+
 const TravailForm = ({ onSuccess }) => {
   const { user } = useContext(UserContext);
   const [message, setMessage] = useState("");
   const [isSuccess, setIsSuccess] = useState(null);
   const [users, setUsers] = useState([]);
+  const [selectedLocation, setSelectedLocation] = useState(null);
+  
+  // Mostaganem, Algeria coordinates
+  const defaultCenter = { lat: 35.9311, lng: 0.0916 };
   
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    setValue,
     reset,
+    formState: { errors },
   } = useForm({
     resolver: zodResolver(schema),
-    defaultValues: {
-      responsable_id: user?.id || "",
-      status: "pending"
-    }
   });
+
+  const handleLocationSelect = (location) => {
+    setSelectedLocation(location);
+    // Convert location object to string format for database storage
+    setValue('location', `${location.lat},${location.lng}`);
+  };
 
   // Fetch users for dropdown selection
   useEffect(() => {
@@ -65,7 +92,7 @@ const TravailForm = ({ onSuccess }) => {
   }, []);
 
   const handleTravailSubmit = async (data) => {
-    console.log(data)
+    console.log(data);
     try {
       // This would connect to your backend endpoint
       const response = await fetch("http://localhost/GTF/backend/travail.php", {
@@ -78,9 +105,8 @@ const TravailForm = ({ onSuccess }) => {
       });
       
       const result = await response.json();
-      console.log(result)
+      console.log(result);
       if (result.success) {
-        
         setIsSuccess(true);
         setMessage(result.message || "Work task created successfully");
         reset();
@@ -100,26 +126,44 @@ const TravailForm = ({ onSuccess }) => {
 
   return (
     <div className="travail-form-container">
-      <h2>Create New Work Task</h2>
-
+      <h2>Nouveau Travail</h2>
       {message && (
-        <div className={`custom-alert ${isSuccess ? "success" : "error"}`}>
+        <div className={`alert ${isSuccess ? "alert-success" : "alert-danger"}`}>
           {message}
         </div>
       )}
-
       <form onSubmit={handleSubmit(handleTravailSubmit)}>
-        <div className="form-group">
-          <label htmlFor="title">Title</label>
-          <input 
-            type="text" 
-            id="title" 
-            className={`form-control ${errors.title ? "is-invalid" : ""}`}
-            {...register("title")} 
-          />
-          {errors.title && (
-            <span className="error-text">{errors.title.message}</span>
-          )}
+        <div className="form-row">
+          <div className="form-group col-md-6">
+            <label htmlFor="title">Title</label>
+            <input 
+              type="text" 
+              id="title" 
+              className={`form-control ${errors.title ? "is-invalid" : ""}`}
+              {...register("title")} 
+            />
+            {errors.title && (
+              <span className="error-text">{errors.title.message}</span>
+            )}
+          </div>
+
+          <div className="form-group col-md-6">
+            <label htmlFor="status">Status</label>
+            <select 
+              id="status" 
+              className={`form-control ${errors.status ? "is-invalid" : ""}`}
+              {...register("status")} 
+            >
+              <option value="">Select Status</option>
+              <option value="pending">Pending</option>
+              <option value="in_progress">In Progress</option>
+              <option value="completed">Completed</option>
+              <option value="cancelled">Cancelled</option>
+            </select>
+            {errors.status && (
+              <span className="error-text">{errors.status.message}</span>
+            )}
+          </div>
         </div>
 
         <div className="form-group">
@@ -132,18 +176,28 @@ const TravailForm = ({ onSuccess }) => {
           ></textarea>
         </div>
 
-        <div className="form-group">
-          <label htmlFor="location">Location</label>
-          <input 
-            type="text" 
-            id="location" 
-            className="form-control"
-            {...register("location")} 
-          />
+        <div className="form-group map-container">
+          <label>Location (Click on map to select)</label>
+          <MapContainer 
+            center={defaultCenter} 
+            zoom={13} 
+            style={{ height: '300px', width: '100%', marginBottom: '1rem' }}
+          >
+            <TileLayer
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            />
+            <LocationMarker onLocationSelect={handleLocationSelect} />
+          </MapContainer>
+          {selectedLocation && (
+            <div className="selected-location">
+              <p>Selected coordinates: {selectedLocation.lat.toFixed(4)}, {selectedLocation.lng.toFixed(4)}</p>
+            </div>
+          )}
         </div>
 
         <div className="form-row">
-          <div className="form-group">
+          <div className="form-group col-md-6">
             <label htmlFor="start_date">Start Date</label>
             <input 
               type="date" 
@@ -156,7 +210,7 @@ const TravailForm = ({ onSuccess }) => {
             )}
           </div>
 
-          <div className="form-group">
+          <div className="form-group col-md-6">
             <label htmlFor="end_date">End Date</label>
             <input 
               type="date" 
@@ -205,23 +259,8 @@ const TravailForm = ({ onSuccess }) => {
         </div>
 
         <div className="form-group">
-          <label htmlFor="status">Status</label>
-          <select 
-            id="status" 
-            className={`form-control ${errors.status ? "is-invalid" : ""}`}
-            {...register("status")} 
-          >
-            <option value="pending">Pending</option>
-            <option value="in_progress">In Progress</option>
-            <option value="completed">Completed</option>
-            <option value="cancelled">Cancelled</option>
-          </select>
-          {errors.status && (
-            <span className="error-text">{errors.status.message}</span>
-          )}
+          <button type="submit" className="btn btn-primary">Create Work Task</button>
         </div>
-
-        <button type="submit" className="btn btn-primary">Create Work Task</button>
       </form>
     </div>
   );
