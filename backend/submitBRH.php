@@ -108,10 +108,16 @@ if ($checkResult->num_rows > 0) {
 }
 $checkQuery->close();
 
-// Insert BRH form
-$insertQuery = $conn->prepare("INSERT INTO brh_forms (travail_id, agent_id, week_number, year,
-    volume_prevu, nbr_ouvriers, moyens_materiel, volume_realise, volume_restant, observation) 
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+// Get the responsable_id for the travail
+$responsableQuery = $conn->prepare("SELECT responsable_id FROM travail WHERE id = ?");
+$responsableQuery->bind_param("i", $input['travail_id']);
+$responsableQuery->execute();
+$responsableResult = $responsableQuery->get_result();
+$responsable = $responsableResult->fetch_assoc();
+$responsableQuery->close();
+
+// Insert the BRH form
+$insertQuery = $conn->prepare("INSERT INTO brh_forms (travail_id, agent_id, week_number, year, volume_prevu, nbr_ouvriers, moyens_materiel, volume_realise, volume_restant, observation, statusA) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'pending')");
 
 if (!$insertQuery) {
     echo json_encode(["success" => false, "message" => "Database error: " . $conn->error]);
@@ -151,6 +157,18 @@ try {
     echo json_encode(["success" => false, "message" => "Failed to submit BRH form: " . $e->getMessage()]);
 }
 
+// Notify responsable about BRH submission
+if ($responsable) {
+    include_once('notifications/create_notification.php');
+    createNotification($responsable['responsable_id'], "New BRH report submitted for travail ID: {$input['travail_id']}");
+}
+
+// Schedule next week's notification
+$nextWeekDate = date('Y-m-d', strtotime('+1 week'));
+$message = "Weekly BRH report due for travail ID: {$input['travail_id']}";
+$scheduleQuery = $conn->prepare("INSERT INTO notifications (user_id, message, is_read, created_at) VALUES (?, ?, 0, ?)");
+$scheduleQuery->bind_param("iss", $agent_id, $message, $nextWeekDate);
+$scheduleQuery->execute();
 $insertQuery->close();
 $conn->close();
 ?>

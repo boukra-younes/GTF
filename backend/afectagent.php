@@ -104,14 +104,24 @@ if (!$updateQuery) {
 $updateQuery->bind_param("ii", $agent_id, $travail_id);
 
 if ($updateQuery->execute()) {
+    // Update agent status
     $updateQuery = $conn->prepare("UPDATE agents SET status = 'busy' WHERE agent_id = ?");
-if (!$updateQuery) {
-    echo json_encode(["success" => false, "message" => "Database error: " . $conn->error]);
-    exit();
-}
-
-$updateQuery->bind_param("i", $agent_id);
-$updateQuery->execute();
+    if (!$updateQuery) {
+        echo json_encode(["success" => false, "message" => "Database error: " . $conn->error]);
+        exit();
+    }
+    
+    // Notify agent about assignment
+    include_once('notifications/create_notification.php');
+    createNotification($agent_id, "You have been assigned to travail: {$travail['titre']}");
+    
+    // Schedule first BRH notification for next week
+    $nextWeekDate = date('Y-m-d', strtotime('+1 week'));
+    $message = "Weekly BRH report due for travail: {$travail['titre']}";
+    $scheduleQuery = $conn->prepare("INSERT INTO notifications (user_id, message, is_read, created_at) VALUES (?, ?, 0, ?)");
+    $scheduleQuery->bind_param("iss", $agent_id, $message, $nextWeekDate);
+    $scheduleQuery->execute();
+    
     // Log the activity
     $description = "Assigned agent {$agent['fname']} ({$agent['email']}) to travail '{$travail['titre']}' (ID: {$travail_id})";
     logUserActivity($_SESSION['user']['id'], 'assign_agent', $description);

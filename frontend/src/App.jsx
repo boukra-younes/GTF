@@ -16,6 +16,7 @@ import ProjectResponsable from "./components/responsable/ProjectsResponsable";
 import Agent from "./pages/agent/Agent";
 import AgentTravail from "./components/agent/AgentTravail";
 import Allmap from "./components/responsable/travail/Allmap";
+import ViewBRH from "./components/responsable/ViewBRH";
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
           <Route path="notifications" element={<Notifications />} />
           <Route path="projects" element={<ProjectResponsable/>} />
           <Route path="map" element={<Allmap />} />
+          <Route path="brh" element={<ViewBRH />} />
         </Route>
         <Route path="/agent" element={<Agent />}>
           <Route path="tasks" element={<AgentTravail />} />

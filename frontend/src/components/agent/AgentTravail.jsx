@@ -46,7 +46,7 @@ const AgentTravail = () => {
   const handleMarkComplete = async (id) => {
     try {
       const response = await fetch(
-        "http://localhost/GTF/backend/completetravail.php",
+        "http://localhost/GTF/backend/markBRHFinished.php",
         {
           method: "POST",
           credentials: "include",

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation,useNavigate } from 'react-router-dom';
-import { FaSun, FaMoon, FaBars, FaTimes, FaProjectDiagram, FaNewspaper, FaBullhorn, FaBell, FaUser, FaSignOutAlt,FaPlus, FaMap  } from 'react-icons/fa';
+import { FaSun, FaMoon, FaBars, FaTimes, FaProjectDiagram, FaNewspaper, FaBullhorn, FaBell, FaUser, FaSignOutAlt,FaPlus, FaMap, FaTable  } from 'react-icons/fa';
 import './ResponsableBar.css';
 
 const ResponsableBar = ({ theme, toggleTheme,user }) => {
@@ -15,7 +15,7 @@ const ResponsableBar = ({ theme, toggleTheme,user }) => {
   const menuItems = [
     { path: 'projects', icon: <FaProjectDiagram />, label: 'Projects' },
     { path: 'map', icon: <FaMap />, label: 'Map' },
-    { path: 'campaigns', icon: <FaBullhorn />, label: 'Campaigns' },
+    { path: 'brh', icon: <FaTable />, label: 'BRHs' },
     { path: 'add', icon: <FaPlus  />, label: 'add' },
   ];
 
@@ -27,7 +27,7 @@ const ResponsableBar = ({ theme, toggleTheme,user }) => {
         });
        
        
-          setUser(null);
+          
           navigate("/");
         
       } catch (error) {
