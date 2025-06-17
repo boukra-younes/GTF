@@ -110,35 +110,12 @@ const AgentBar = ({ theme, toggleTheme, user }) => {
             onClick={toggleMobileMenu}
             aria-label="Toggle mobile menu"
           >
-            {mobileMenuOpen ? <FiX /> : <FiMenu />}
+          
           </button>
         </div>
       </div>
 
-      <div className={`agent-mobile-menu ${mobileMenuOpen ? "open" : ""}`}>
-        <ul className="agent-mobile-menu-list">
-          <li>
-            <Link
-              to="/agent/tasks"
-              className={`agent-mobile-menu-item ${isActive("/tasks") ? "active" : ""}`}
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              <FiClipboard />
-              <span>Mes Tâches</span>
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/agent/notifications"
-              className={`agent-mobile-menu-item ${isActive("/notifications") ? "active" : ""}`}
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              <FiBell />
-              <span>Notifications</span>
-            </Link>
-          </li>
-        </ul>
-      </div>
+
     </nav>
   );
 };

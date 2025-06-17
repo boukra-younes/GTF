@@ -37,6 +37,7 @@ function App() {
           <Route path="projects" element={<ProjectResponsable/>} />
           <Route path="map" element={<Allmap />} />
           <Route path="brh" element={<ViewBRH />} />
+          <Route path="profile" element={<UserSettings />} />
         </Route>
         <Route path="/agent" element={<Agent />}>
           <Route path="tasks" element={<AgentTravail />} />

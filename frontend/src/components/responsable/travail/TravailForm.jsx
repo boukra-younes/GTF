@@ -18,8 +18,6 @@ const schema = z.object({
   end_date: z.string().refine(val => !val || !isNaN(Date.parse(val)), {
     message: "Please enter a valid end date",
   }).optional(),
-  responsable_id: z.string().min(1, "Please select a responsible person"),
-  agents_affectes_id: z.string().min(1, "Please select assigned agents"),
   status: z.string().min(1, "Please select a status"),
 });
 
@@ -222,40 +220,6 @@ const TravailForm = ({ onSuccess }) => {
               <span className="error-text">{errors.end_date.message}</span>
             )}
           </div>
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="responsable_id">Responsible Person</label>
-          <select 
-            id="responsable_id" 
-            className={`form-control ${errors.responsable_id ? "is-invalid" : ""}`}
-            {...register("responsable_id")} 
-          >
-            <option value="">Select Responsible Person</option>
-            {users.map(user => (
-              <option key={user.id} value={user.id}>{user.fname}</option>
-            ))}
-          </select>
-          {errors.responsable_id && (
-            <span className="error-text">{errors.responsable_id.message}</span>
-          )}
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="agents_affectes_id">Assigned Agents</label>
-          <select 
-            id="agents_affectes_id" 
-            className={`form-control ${errors.agents_affectes_id ? "is-invalid" : ""}`}
-            {...register("agents_affectes_id")} 
-          >
-            <option value="">Select Assigned Agent</option>
-            {users.map(user => (
-              <option key={user.id} value={user.id}>{user.fname}</option>
-            ))}
-          </select>
-          {errors.agents_affectes_id && (
-            <span className="error-text">{errors.agents_affectes_id.message}</span>
-          )}
         </div>
 
         <div className="form-group">

@@ -537,7 +537,7 @@ ALTER TABLE `travail`
 --
 -- Constraints for table `user_activity`
 --
-ALTER TABLE `user_activity`
+ALTER TABLE `user_activity` 
   ADD CONSTRAINT `user_activity_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 COMMIT;
 

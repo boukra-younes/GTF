@@ -101,7 +101,7 @@ const ResponsableBar = ({ theme, toggleTheme,user }) => {
                 <span className="responsable-profile-email">{user.email || 'user@example.com'}</span>
               </div>
               <div className="responsable-profile-menu-items">
-                <Link to="/profile" className="responsable-profile-menu-item" onClick={() => setIsProfileMenuOpen(false)}>
+                <Link to="/responsable/profile" className="responsable-profile-menu-item" onClick={() => setIsProfileMenuOpen(false)}>
                   <FaUser />
                   <span>Profile</span>
                 </Link>

@@ -44,27 +44,10 @@ const AgentTravail = () => {
   }, []);
 
   const handleMarkComplete = async (id) => {
-    try {
-      const response = await fetch(
-        "http://localhost/GTF/backend/markBRHFinished.php",
-        {
-          method: "POST",
-          credentials: "include",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ id }),
-        }
-      );
-      const result = await response.json();
-      if (result.success) {
-        fetchAgentTravails(); // Refresh the tasks
-      } else {
-        alert(result.message || "Failed to mark task as complete");
-      }
-    } catch (err) {
-      alert("Error updating task status");
-    }
+  
+   
+        alert("marked task as complete");
+     
   };
 
   const handleOpenBRHForm = (travail) => {
